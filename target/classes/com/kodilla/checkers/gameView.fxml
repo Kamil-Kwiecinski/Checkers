@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane onKeyPressed="#pauseAction" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.kodilla.checkers.GameController">
+   <children>
+      <GridPane layoutX="23.0" layoutY="57.0" prefHeight="400.0" prefWidth="406.0" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="100.0" AnchorPane.topAnchor="40.0">
+        <columnConstraints>
+            <ColumnConstraints />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="20.0" minWidth="20.0" prefWidth="20.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefWidth="50.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefWidth="50.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefWidth="50.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefWidth="50.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefWidth="50.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefWidth="50.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="50.0" minWidth="-Infinity" prefWidth="50.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="50.0" minWidth="50.0" prefWidth="50.0" />
+        </columnConstraints>
+        <rowConstraints>
+            <RowConstraints maxHeight="20.0" minHeight="20.0" prefHeight="20.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="1.7976931348623157E308" prefHeight="50.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="1.7976931348623157E308" prefHeight="50.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="1.7976931348623157E308" prefHeight="50.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="1.7976931348623157E308" prefHeight="50.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="1.7976931348623157E308" prefHeight="50.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="1.7976931348623157E308" prefHeight="50.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="1.7976931348623157E308" prefHeight="50.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="1.7976931348623157E308" prefHeight="50.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Label text="A" textAlignment="CENTER" GridPane.columnIndex="2">
+               <font>
+                  <Font name="Lucida Bright" size="12.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets left="20.0" />
+               </GridPane.margin>
+            </Label>
+            <Label text="B" GridPane.columnIndex="3">
+               <font>
+                  <Font name="Lucida Bright" size="12.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets left="20.0" />
+               </GridPane.margin>
+            </Label>
+            <Label text="C" GridPane.columnIndex="4">
+               <font>
+                  <Font name="Lucida Bright" size="12.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets left="20.0" />
+               </GridPane.margin>
+            </Label>
+            <Label text="D" GridPane.columnIndex="5">
+               <font>
+                  <Font name="Lucida Bright" size="12.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets left="20.0" />
+               </GridPane.margin>
+            </Label>
+            <Label text="E" GridPane.columnIndex="6">
+               <font>
+                  <Font name="Lucida Bright" size="12.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets left="20.0" />
+               </GridPane.margin>
+            </Label>
+            <Label text="F" GridPane.columnIndex="7">
+               <font>
+                  <Font name="Lucida Bright" size="12.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets left="20.0" />
+               </GridPane.margin>
+            </Label>
+            <Label text="G" GridPane.columnIndex="8">
+               <font>
+                  <Font name="Lucida Bright" size="12.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets left="20.0" />
+               </GridPane.margin>
+            </Label>
+            <Label text="H" GridPane.columnIndex="9">
+               <font>
+                  <Font name="Lucida Bright" size="12.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets left="20.0" />
+               </GridPane.margin>
+            </Label>
+            <Label text="1" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="1">
+               <font>
+                  <Font name="Lucida Bright" size="12.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets />
+               </GridPane.margin>
+            </Label>
+            <Label text="2" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="2">
+               <font>
+                  <Font name="Lucida Bright" size="12.0" />
+               </font>
+            </Label>
+            <Label text="3" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="3">
+               <font>
+                  <Font name="Lucida Bright" size="12.0" />
+               </font>
+            </Label>
+            <Label text="4" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="4">
+               <font>
+                  <Font name="Lucida Bright" size="12.0" />
+               </font>
+            </Label>
+            <Label text="5" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="5">
+               <font>
+                  <Font name="Lucida Bright" size="12.0" />
+               </font>
+            </Label>
+            <Label text="6" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="6">
+               <font>
+                  <Font name="Lucida Bright" size="12.0" />
+               </font>
+            </Label>
+            <Label text="7" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="7">
+               <font>
+                  <Font name="Lucida Bright" size="12.0" />
+               </font>
+            </Label>
+            <Label text="8" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="8">
+               <font>
+                  <Font name="Lucida Bright" size="12.0" />
+               </font>
+            </Label>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="50.0" onMousePressed="#mouseChoosePlace" stroke="BLACK" strokeType="INSIDE" width="50.0" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="50.0" onMousePressed="#mouseChoosePlace" stroke="BLACK" strokeType="INSIDE" width="50.0" GridPane.columnIndex="4" GridPane.rowIndex="1" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="50.0" onMousePressed="#mouseChoosePlace" stroke="BLACK" strokeType="INSIDE" width="50.0" GridPane.columnIndex="4" GridPane.rowIndex="3" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="50.0" onMousePressed="#mouseChoosePlace" stroke="BLACK" strokeType="INSIDE" width="50.0" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="50.0" onMousePressed="#mouseChoosePlace" stroke="BLACK" strokeType="INSIDE" width="50.0" GridPane.columnIndex="3" GridPane.rowIndex="4" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="50.0" onMousePressed="#mouseChoosePlace" stroke="BLACK" strokeType="INSIDE" width="50.0" GridPane.columnIndex="5" GridPane.rowIndex="2" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="50.0" onMousePressed="#mouseChoosePlace" stroke="BLACK" strokeType="INSIDE" width="50.0" GridPane.columnIndex="6" GridPane.rowIndex="1" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="50.0" onMousePressed="#mouseChoosePlace" stroke="BLACK" strokeType="INSIDE" width="50.0" GridPane.columnIndex="6" GridPane.rowIndex="3" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="50.0" onMousePressed="#mouseChoosePlace" stroke="BLACK" strokeType="INSIDE" width="50.0" GridPane.columnIndex="5" GridPane.rowIndex="4" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="50.0" onMousePressed="#mouseChoosePlace" stroke="BLACK" strokeType="INSIDE" width="50.0" GridPane.columnIndex="2" GridPane.rowIndex="5" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="50.0" onMousePressed="#mouseChoosePlace" stroke="BLACK" strokeType="INSIDE" width="50.0" GridPane.columnIndex="4" GridPane.rowIndex="5" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="50.0" onMousePressed="#mouseChoosePlace" stroke="BLACK" strokeType="INSIDE" width="50.0" GridPane.columnIndex="6" GridPane.rowIndex="5" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="50.0" onMousePressed="#mouseChoosePlace" stroke="BLACK" strokeType="INSIDE" width="50.0" GridPane.columnIndex="7" GridPane.rowIndex="2" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="50.0" onMousePressed="#mouseChoosePlace" stroke="BLACK" strokeType="INSIDE" width="50.0" GridPane.columnIndex="3" GridPane.rowIndex="6" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="50.0" onMousePressed="#mouseChoosePlace" stroke="BLACK" strokeType="INSIDE" width="50.0" GridPane.columnIndex="2" GridPane.rowIndex="7" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="50.0" onMousePressed="#mouseChoosePlace" stroke="BLACK" strokeType="INSIDE" width="50.0" GridPane.columnIndex="3" GridPane.rowIndex="8" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="50.0" onMousePressed="#mouseChoosePlace" stroke="BLACK" strokeType="INSIDE" width="50.0" GridPane.columnIndex="4" GridPane.rowIndex="7" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="50.0" onMousePressed="#mouseChoosePlace" stroke="BLACK" strokeType="INSIDE" width="50.0" GridPane.columnIndex="5" GridPane.rowIndex="6" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="50.0" onMousePressed="#mouseChoosePlace" stroke="BLACK" strokeType="INSIDE" width="50.0" GridPane.columnIndex="6" GridPane.rowIndex="7" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="50.0" onMousePressed="#mouseChoosePlace" stroke="BLACK" strokeType="INSIDE" width="50.0" GridPane.columnIndex="5" GridPane.rowIndex="8" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="50.0" onMousePressed="#mouseChoosePlace" stroke="BLACK" strokeType="INSIDE" width="50.0" GridPane.columnIndex="7" GridPane.rowIndex="8" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="50.0" onMousePressed="#mouseChoosePlace" stroke="BLACK" strokeType="INSIDE" width="50.0" GridPane.columnIndex="9" GridPane.rowIndex="8" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="50.0" onMousePressed="#mouseChoosePlace" stroke="BLACK" strokeType="INSIDE" width="50.0" GridPane.columnIndex="8" GridPane.rowIndex="7" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="50.0" onMousePressed="#mouseChoosePlace" stroke="BLACK" strokeType="INSIDE" width="50.0" GridPane.columnIndex="7" GridPane.rowIndex="6" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="50.0" onMousePressed="#mouseChoosePlace" stroke="BLACK" strokeType="INSIDE" width="50.0" GridPane.columnIndex="8" GridPane.rowIndex="5" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="50.0" onMousePressed="#mouseChoosePlace" stroke="BLACK" strokeType="INSIDE" width="50.0" GridPane.columnIndex="7" GridPane.rowIndex="4" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="50.0" onMousePressed="#mouseChoosePlace" stroke="BLACK" strokeType="INSIDE" width="50.0" GridPane.columnIndex="8" GridPane.rowIndex="3" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="50.0" onMousePressed="#mouseChoosePlace" stroke="BLACK" strokeType="INSIDE" width="50.0" GridPane.columnIndex="8" GridPane.rowIndex="1" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="50.0" onMousePressed="#mouseChoosePlace" stroke="BLACK" strokeType="INSIDE" width="50.0" GridPane.columnIndex="9" GridPane.rowIndex="2" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="50.0" onMousePressed="#mouseChoosePlace" stroke="BLACK" strokeType="INSIDE" width="50.0" GridPane.columnIndex="9" GridPane.rowIndex="4" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="50.0" onMousePressed="#mouseChoosePlace" stroke="BLACK" strokeType="INSIDE" width="50.0" GridPane.columnIndex="9" GridPane.rowIndex="6" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#5e5e5e" height="50.0" onMousePressed="#mouseChoosePlace" stroke="BLACK" strokeType="INSIDE" width="50.0" GridPane.columnIndex="2" GridPane.rowIndex="8" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#5e5e5e" height="50.0" onMousePressed="#mouseChoosePlace" stroke="BLACK" strokeType="INSIDE" width="50.0" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#5e5e5e" height="50.0" onMousePressed="#mouseChoosePlace" stroke="BLACK" strokeType="INSIDE" width="50.0" GridPane.columnIndex="3" GridPane.rowIndex="3" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#5e5e5e" height="50.0" onMousePressed="#mouseChoosePlace" stroke="BLACK" strokeType="INSIDE" width="50.0" GridPane.columnIndex="2" GridPane.rowIndex="4" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#5e5e5e" height="50.0" onMousePressed="#mouseChoosePlace" stroke="BLACK" strokeType="INSIDE" width="50.0" GridPane.columnIndex="3" GridPane.rowIndex="5" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#5e5e5e" height="50.0" onMousePressed="#mouseChoosePlace" stroke="BLACK" strokeType="INSIDE" width="50.0" GridPane.columnIndex="2" GridPane.rowIndex="6" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#5e5e5e" height="50.0" onMousePressed="#mouseChoosePlace" stroke="BLACK" strokeType="INSIDE" width="50.0" GridPane.columnIndex="3" GridPane.rowIndex="7" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#5e5e5e" height="50.0" onMousePressed="#mouseChoosePlace" stroke="BLACK" strokeType="INSIDE" width="50.0" GridPane.columnIndex="5" GridPane.rowIndex="1" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#5e5e5e" height="50.0" onMousePressed="#mouseChoosePlace" stroke="BLACK" strokeType="INSIDE" width="50.0" GridPane.columnIndex="4" GridPane.rowIndex="2" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#5e5e5e" height="50.0" onMousePressed="#mouseChoosePlace" stroke="BLACK" strokeType="INSIDE" width="50.0" GridPane.columnIndex="4" GridPane.rowIndex="4" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#5e5e5e" height="50.0" onMousePressed="#mouseChoosePlace" stroke="BLACK" strokeType="INSIDE" width="50.0" GridPane.columnIndex="5" GridPane.rowIndex="3" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#5e5e5e" height="50.0" onMousePressed="#mouseChoosePlace" stroke="BLACK" strokeType="INSIDE" width="50.0" GridPane.columnIndex="6" GridPane.rowIndex="2" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#5e5e5e" height="50.0" onMousePressed="#mouseChoosePlace" stroke="BLACK" strokeType="INSIDE" width="50.0" GridPane.columnIndex="7" GridPane.rowIndex="1" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#5e5e5e" height="50.0" onMousePressed="#mouseChoosePlace" stroke="BLACK" strokeType="INSIDE" width="50.0" GridPane.columnIndex="6" GridPane.rowIndex="4" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#5e5e5e" height="50.0" onMousePressed="#mouseChoosePlace" stroke="BLACK" strokeType="INSIDE" width="50.0" GridPane.columnIndex="5" GridPane.rowIndex="5" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#5e5e5e" height="50.0" onMousePressed="#mouseChoosePlace" stroke="BLACK" strokeType="INSIDE" width="50.0" GridPane.columnIndex="4" GridPane.rowIndex="6" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#5e5e5e" height="50.0" onMousePressed="#mouseChoosePlace" stroke="BLACK" strokeType="INSIDE" width="50.0" GridPane.columnIndex="5" GridPane.rowIndex="7" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#5e5e5e" height="50.0" onMousePressed="#mouseChoosePlace" stroke="BLACK" strokeType="INSIDE" width="50.0" GridPane.columnIndex="4" GridPane.rowIndex="8" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#5e5e5e" height="50.0" onMousePressed="#mouseChoosePlace" stroke="BLACK" strokeType="INSIDE" width="50.0" GridPane.columnIndex="6" GridPane.rowIndex="8" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#5e5e5e" height="50.0" onMousePressed="#mouseChoosePlace" stroke="BLACK" strokeType="INSIDE" width="50.0" GridPane.columnIndex="6" GridPane.rowIndex="6" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#5e5e5e" height="50.0" onMousePressed="#mouseChoosePlace" stroke="BLACK" strokeType="INSIDE" width="50.0" GridPane.columnIndex="7" GridPane.rowIndex="5" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#5e5e5e" height="50.0" onMousePressed="#mouseChoosePlace" stroke="BLACK" strokeType="INSIDE" width="50.0" GridPane.columnIndex="8" GridPane.rowIndex="4" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#5e5e5e" height="50.0" onMousePressed="#mouseChoosePlace" stroke="BLACK" strokeType="INSIDE" width="50.0" GridPane.columnIndex="7" GridPane.rowIndex="3" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#5e5e5e" height="50.0" onMousePressed="#mouseChoosePlace" stroke="BLACK" strokeType="INSIDE" width="50.0" GridPane.columnIndex="8" GridPane.rowIndex="2" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#5e5e5e" height="50.0" onMousePressed="#mouseChoosePlace" stroke="BLACK" strokeType="INSIDE" width="50.0" GridPane.columnIndex="9" GridPane.rowIndex="1" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#5e5e5e" height="50.0" onMousePressed="#mouseChoosePlace" stroke="BLACK" strokeType="INSIDE" width="50.0" GridPane.columnIndex="9" GridPane.rowIndex="3" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#5e5e5e" height="50.0" onMousePressed="#mouseChoosePlace" stroke="BLACK" strokeType="INSIDE" width="50.0" GridPane.columnIndex="9" GridPane.rowIndex="5" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#5e5e5e" height="50.0" onMousePressed="#mouseChoosePlace" stroke="BLACK" strokeType="INSIDE" width="50.0" GridPane.columnIndex="8" GridPane.rowIndex="6" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#5e5e5e" height="50.0" onMousePressed="#mouseChoosePlace" stroke="BLACK" strokeType="INSIDE" width="50.0" GridPane.columnIndex="7" GridPane.rowIndex="7" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#5e5e5e" height="50.0" onMousePressed="#mouseChoosePlace" stroke="BLACK" strokeType="INSIDE" width="50.0" GridPane.columnIndex="9" GridPane.rowIndex="7" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#5e5e5e" height="50.0" onMousePressed="#mouseChoosePlace" stroke="BLACK" strokeType="INSIDE" width="50.0" GridPane.columnIndex="8" GridPane.rowIndex="8" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="50.0" onMousePressed="#mouseChoosePlace" stroke="BLACK" strokeType="INSIDE" width="50.0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#5e5e5e" height="50.0" onMousePressed="#mouseChoosePlace" stroke="BLACK" strokeType="INSIDE" width="50.0" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+            <Circle fx:id="id1" fill="WHITE" onMousePressed="#mouseChooseChecker" radius="19.0" stroke="BLACK" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="8" GridPane.valignment="CENTER" />
+            <Circle fx:id="id5" fill="WHITE" onMousePressed="#mouseChooseChecker" radius="19.0" stroke="BLACK" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="7" GridPane.valignment="CENTER" />
+            <Circle fx:id="id9" fill="WHITE" onMousePressed="#mouseChooseChecker" radius="19.0" stroke="BLACK" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="6" GridPane.valignment="CENTER" />
+            <Circle fx:id="id10" fill="WHITE" onMousePressed="#mouseChooseChecker" radius="19.0" stroke="BLACK" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="6" GridPane.valignment="CENTER" />
+            <Circle fx:id="id6" fill="WHITE" onMousePressed="#mouseChooseChecker" radius="19.0" stroke="BLACK" GridPane.columnIndex="5" GridPane.halignment="CENTER" GridPane.rowIndex="7" GridPane.valignment="CENTER" />
+            <Circle fx:id="id2" fill="WHITE" onMousePressed="#mouseChooseChecker" radius="19.0" stroke="BLACK" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="8" GridPane.valignment="CENTER" />
+            <Circle fx:id="id11" fill="WHITE" onMousePressed="#mouseChooseChecker" radius="19.0" stroke="BLACK" GridPane.columnIndex="6" GridPane.halignment="CENTER" GridPane.rowIndex="6" GridPane.valignment="CENTER" />
+            <Circle fx:id="id12" fill="WHITE" onMousePressed="#mouseChooseChecker" radius="19.0" stroke="BLACK" GridPane.columnIndex="8" GridPane.halignment="CENTER" GridPane.rowIndex="6" GridPane.valignment="CENTER" />
+            <Circle fx:id="id7" fill="WHITE" onMousePressed="#mouseChooseChecker" radius="19.0" stroke="BLACK" GridPane.columnIndex="7" GridPane.halignment="CENTER" GridPane.rowIndex="7" GridPane.valignment="CENTER" />
+            <Circle fx:id="id8" fill="WHITE" onMousePressed="#mouseChooseChecker" radius="19.0" stroke="BLACK" GridPane.columnIndex="9" GridPane.halignment="CENTER" GridPane.rowIndex="7" GridPane.valignment="CENTER" />
+            <Circle fx:id="id3" fill="WHITE" onMousePressed="#mouseChooseChecker" radius="19.0" stroke="BLACK" GridPane.columnIndex="6" GridPane.halignment="CENTER" GridPane.rowIndex="8" />
+            <Circle fx:id="id4" fill="WHITE" onMousePressed="#mouseChooseChecker" radius="19.0" stroke="BLACK" GridPane.columnIndex="8" GridPane.halignment="CENTER" GridPane.rowIndex="8" GridPane.valignment="CENTER" />
+            <Circle fx:id="id17" fill="BLACK" onMousePressed="#mouseChooseChecker" radius="19.0" stroke="BLACK" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
+            <Circle fx:id="id21" fill="BLACK" onMousePressed="#mouseChooseChecker" radius="19.0" stroke="BLACK" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+            <Circle fx:id="id13" fill="BLACK" onMousePressed="#mouseChooseChecker" radius="19.0" stroke="BLACK" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
+            <Circle fx:id="id18" fill="BLACK" onMousePressed="#mouseChooseChecker" radius="19.0" stroke="BLACK" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
+            <Circle fx:id="id22" fill="BLACK" onMousePressed="#mouseChooseChecker" radius="19.0" stroke="BLACK" GridPane.columnIndex="5" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+            <Circle fx:id="id14" fill="BLACK" onMousePressed="#mouseChooseChecker" radius="19.0" stroke="BLACK" GridPane.columnIndex="5" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
+            <Circle fx:id="id19" fill="BLACK" onMousePressed="#mouseChooseChecker" radius="19.0" stroke="BLACK" GridPane.columnIndex="6" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
+            <Circle fx:id="id23" fill="BLACK" onMousePressed="#mouseChooseChecker" radius="19.0" stroke="BLACK" GridPane.columnIndex="7" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+            <Circle fx:id="id15" fill="BLACK" onMousePressed="#mouseChooseChecker" radius="19.0" stroke="BLACK" GridPane.columnIndex="7" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
+            <Circle fx:id="id20" fill="BLACK" onMousePressed="#mouseChooseChecker" radius="19.0" stroke="BLACK" GridPane.columnIndex="8" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
+            <Circle fx:id="id24" fill="BLACK" onMousePressed="#mouseChooseChecker" radius="19.0" stroke="BLACK" GridPane.columnIndex="9" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+            <Circle fx:id="id16" fill="BLACK" onMousePressed="#mouseChooseChecker" radius="19.0" stroke="BLACK" GridPane.columnIndex="9" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
+         </children>
+      </GridPane>
+      <Label fx:id="playerTwoText" layoutX="14.0" layoutY="14.0" text="Player Two" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="15.0">
+         <font>
+            <Font name="Lucida Bright" size="12.0" />
+         </font>
+      </Label>
+      <Label fx:id="playerOneText" layoutX="528.0" layoutY="440.0" text="Player One" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="15.0">
+         <font>
+            <Font name="Lucida Bright" size="12.0" />
+         </font>
+      </Label>
+      <Label fx:id="statusText" layoutX="296.0" layoutY="14.0" text="Status">
+         <font>
+            <Font name="Lucida Bright" size="12.0" />
+         </font></Label>
+      <Label fx:id="statusCoordinate" layoutX="529.0" layoutY="13.0" prefHeight="32.0" prefWidth="89.0" text="Checker's coordinates:" wrapText="true">
+         <font>
+            <Font name="Lucida Bright" size="12.0" />
+         </font>
+      </Label>
+      <Label fx:id="statusXCoordinate" layoutX="552.0" layoutY="57.0" prefHeight="32.0" prefWidth="17.0" text="X" wrapText="true">
+         <font>
+            <Font name="Lucida Bright" size="12.0" />
+         </font>
+      </Label>
+      <Label fx:id="statusYCoordinate" layoutX="565.0" layoutY="57.0" prefHeight="32.0" prefWidth="17.0" text="Y" wrapText="true">
+         <font>
+            <Font name="Lucida Bright" size="12.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>
