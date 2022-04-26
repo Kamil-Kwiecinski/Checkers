@@ -9,6 +9,7 @@ module com.kodilla.checkers {
     requires org.kordamp.ikonli.javafx;
     requires org.kordamp.bootstrapfx.core;
     requires eu.hansolo.tilesfx;
+    requires jdk.jdeps;
 
     opens com.kodilla.checkers to javafx.fxml;
     exports com.kodilla.checkers;

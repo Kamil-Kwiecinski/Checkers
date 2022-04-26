@@ -10,8 +10,6 @@ public class Application extends javafx.application.Application {
     @Override
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(Application.class.getResource("mainView.fxml"));
-//        Game game = new Game();
-//        game.init();
         Scene scene = new Scene(fxmlLoader.load());
         stage.setTitle("Checkers Game");
         stage.setScene(scene);

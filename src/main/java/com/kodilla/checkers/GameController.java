@@ -1,20 +1,29 @@
 package com.kodilla.checkers;
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
-import javafx.scene.shape.Circle;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
+import javafx.scene.text.Font;
+import javafx.scene.text.Text;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
-import java.io.IOException;
-
-import static javafx.scene.paint.Color.BLACK;
-import static javafx.scene.paint.Color.WHITE;
+import java.util.Optional;
 
 public class GameController {
 
@@ -46,7 +55,7 @@ public class GameController {
     }
 
     public void mouseChooseChecker(MouseEvent e) {
-        circle = (Node)e.getSource();
+        circle = (Node) e.getSource();
         Integer columnIndex = GridPane.getColumnIndex(circle);
         Integer rowIndex = GridPane.getRowIndex(circle);
         xCoordinate = columnIndex - 2;
@@ -70,14 +79,14 @@ public class GameController {
             statusXCoordinate.setText("F");
         } else if (columnIndex == 8) {
             statusXCoordinate.setText("G");
-        } else  if (columnIndex == 9) {
+        } else if (columnIndex == 9) {
             statusXCoordinate.setText("H");
         }
     }
 
     public void mouseChoosePlace(MouseEvent e) {
-        Node source = (Node)e.getSource();
-        if(source.toString().contains("fill=0xffffffff") == false) {
+        Node source = (Node) e.getSource();
+        if (source.toString().contains("fill=0xffffffff") == false) {
             Integer columnIndex = GridPane.getColumnIndex(source);
             Integer rowIndex = GridPane.getRowIndex(source);
             System.out.println(columnIndex + " " + rowIndex);
@@ -90,19 +99,68 @@ public class GameController {
         }
     }
 
-    @FXML
-    public void pauseAction(){
-        FXMLLoader loader = new FXMLLoader(this.getClass().getResource("pauseView.fxml"));
-        AnchorPane anchorPane = new AnchorPane();
-        try {
-            anchorPane = loader.load();
-        } catch (IOException e) {
-            e.printStackTrace();
+    public void pauseAction(KeyEvent event) {
+
+        Parent root = new AnchorPane();
+
+        if(event.getCode()==KeyCode.ESCAPE) {
+            Font applicationFont = new Font("Lucida Bright", 12);
+            VBox pauseRoot = new VBox(5);
+            Label pauseTitle = new Label();
+            pauseTitle.setText("Paused");
+
+            pauseTitle.setFont(new Font("Lucida Bright", 24) );
+            pauseRoot.getChildren().add(pauseTitle);
+            pauseRoot.setStyle("-fx-background-color: rgba(255, 255, 255, 1.0);");
+            pauseRoot.setAlignment(Pos.CENTER);
+            pauseRoot.setPadding(new Insets(30));
+
+            Button resume = new Button("Resume");
+            resume.setFont(applicationFont);
+            pauseRoot.getChildren().add(resume);
+
+            Button mainMenu = new Button("Back to Menu");
+            mainMenu.setFont(applicationFont);
+            pauseRoot.getChildren().add(mainMenu);
+
+            Button exit = new Button("Exit");
+            exit.setFont(applicationFont);
+            pauseRoot.getChildren().add(exit);
+
+            Stage popupStage = new Stage(StageStyle.TRANSPARENT);
+            popupStage.setScene(new Scene(pauseRoot, Color.TRANSPARENT));
+
+            exit.setOnAction(e ->{
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "", ButtonType.YES, ButtonType.NO);
+                Text header = new Text();
+                header.setFont(applicationFont);
+                header.setText("Do you want to quit?");
+                alert.setHeaderText(header.getText());
+                ((Button) alert.getDialogPane().lookupButton(ButtonType.YES)).setFont(applicationFont);
+                ((Button) alert.getDialogPane().lookupButton(ButtonType.NO)).setFont(applicationFont);
+
+                Optional<ButtonType> result = alert.showAndWait();
+                if(result.get() == ButtonType.YES)
+                {
+                    Platform.exit();
+                }
+
+                alert.show();
+            });
+
+            resume.setOnAction(e -> {
+                root.setEffect(null);
+                popupStage.hide();
+            });
+
+            mainMenu.setOnAction(e -> {
+                mainController.loadMenuView();
+                popupStage.hide();
+            });
+            popupStage.show();
         }
-        PauseViewController pauseViewController = loader.getController();
-        pauseViewController.setMainController(mainController);
-        mainController.setScreen(anchorPane);
     }
+
 
     public void initialize() {
         labelOne = playerOneText;
@@ -111,4 +169,5 @@ public class GameController {
         labelXCoordinate = statusXCoordinate;
         labelYCoordinate = statusYCoordinate;
     }
+
 }
