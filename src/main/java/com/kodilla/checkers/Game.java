@@ -1,20 +1,16 @@
 package com.kodilla.checkers;
 
 
-public class Game extends GameController{
+public class Game {
 
     private static final String WHITE_COLOR = "white";
     private static final String BLACK_COLOR = "black";
 
-    public void init(int oldX, int oldY, int newX, int newY) {
-        Game game = new Game();
+    public Elements init(Game game) {
 
         Cell[][] cells;
         Checker[][] checkers;
         Checker[][] actualCheckers;
-        boolean end = false;
-        boolean isTrue = false;
-        int firstRound = 1;
 
         String[][] table = new String[8][8];
         Board board = new Board(table, false);
@@ -23,29 +19,33 @@ public class Game extends GameController{
         checkers = game.createCheckersOnCells(cells);
         board.setReady(true);
         actualCheckers = checkers;
-
-        round(game, cells, checkers, actualCheckers, end, isTrue, firstRound, oldX, oldY, newX, newY);
+        int firstRound = 1;
+        return new Elements(checkers, cells, firstRound, actualCheckers);
     }
 
-    private static void round(Game game, Cell[][] cells, Checker[][] checkers, Checker[][] actualCheckers, boolean end,
-                              boolean isTrue, int firstRound, int oldX, int oldY, int newX, int newY) {
-        while(!end) {
-            labelStatus.setText("Whites move.");
+    public void round(Game game, Cell[][] cells, Checker[][] checkers, Checker[][] actualCheckers, int firstRound,
+                      int oldX, int oldY, int newX, int newY) {
+
+//        boolean end = false;
+//        boolean isTrue = false;
+
+//        while(!end) {
+//            labelStatus.setText("Whites move.");
             int xCoordinate = oldX;
             int yCoordinate = oldY;
             int newXCoordinate = newX;
             int newYCoordinate = newY;
 
 
-            while(!isTrue) {
+//            while(!isTrue) {
                 if (actualCheckers[xCoordinate][yCoordinate].getColor().equals(WHITE_COLOR)) {
                     actualCheckers = game.move(cells, checkers, xCoordinate, yCoordinate, newXCoordinate,
                             newYCoordinate, firstRound);
-                    isTrue = true;
-                } else {
-                    System.out.println("It's not your checker.");
+//                    isTrue = true;
+//                } else {
+//                    System.out.println("It's not your checker.");
                 }
-            }
+//            }
 
             for (int i = 0; i < 8; i++) {
                 for (int n = 0; n < 8; n++) {
@@ -55,21 +55,21 @@ public class Game extends GameController{
                 }
             }
 
-            labelStatus.setText("Blacks move.");
+//            labelStatus.setText("Blacks move.");
 //            xCoordinate = gameController.xCoordinate;
 //            yCoordinate = gameController.yCoordinate;
 //            newXCoordinate = gameController.newXCoordinate;
 //            newYCoordinate = gameController.newYCoordinate;
 
-            while(!isTrue) {
+//            while(!isTrue) {
                 if (actualCheckers[xCoordinate][yCoordinate].getColor().equals(BLACK_COLOR)) {
                     actualCheckers = game.move(cells, actualCheckers, xCoordinate, yCoordinate, newXCoordinate,
                             newYCoordinate, firstRound);
-                    isTrue = true;
-                } else {
-                    System.out.println("It's not your checker.");
+//                    isTrue = true;
+//                } else {
+//                    System.out.println("It's not your checker.");
                 }
-            }
+//            }
 
             firstRound = 0;
             System.out.println(game.howManyColorCheckers(actualCheckers, WHITE_COLOR));
@@ -89,7 +89,7 @@ public class Game extends GameController{
                 System.out.println("Blacks lose.");
             }
         }
-    }
+//    }
 
     public Cell[][] createCells() {
         Cell[][] cells = new Cell[8][8];
@@ -115,6 +115,7 @@ public class Game extends GameController{
                     cells[x][y].setStartPosition(BLACK_COLOR);
             }
         }
+        System.out.println("Cells are ready");
         return cells;
     }
 
@@ -140,6 +141,7 @@ public class Game extends GameController{
                 }
             }
         }
+        System.out.println("Checkers on cells");
         return checkers;
     }
 

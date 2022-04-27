@@ -38,6 +38,8 @@ public class GameController {
     public int newYCoordinate;
     public Node circle;
     public Game game = new Game();
+    public Elements elements = new Elements(game.init(game).getCheckers(), game.init(game).getCells(),
+            game.init(game).getFirstRound(), game.init(game).getActualCheckers());
 
     @FXML
     public Label playerOneText;
@@ -55,7 +57,6 @@ public class GameController {
     }
 
     public void mouseChooseChecker(MouseEvent e) {
-
         circle = (Node) e.getSource();
         Integer columnIndex = GridPane.getColumnIndex(circle);
         Integer rowIndex = GridPane.getRowIndex(circle);
@@ -90,22 +91,25 @@ public class GameController {
         if (source.toString().contains("fill=0xffffffff") == false) {
             Integer columnIndex = GridPane.getColumnIndex(source);
             Integer rowIndex = GridPane.getRowIndex(source);
-            System.out.println(columnIndex + " " + rowIndex);
             newXCoordinate = columnIndex - 2;
             newYCoordinate = Math.abs(rowIndex - 8);
-            System.out.println("Mouse choose cell: " + newYCoordinate + " " + newXCoordinate);
+            System.out.println("Mouse choose cell: " + newXCoordinate + " " + newYCoordinate);
             System.out.println(columnIndex + " " + rowIndex);
             GridPane.setRowIndex(circle, rowIndex);
             GridPane.setColumnIndex(circle, columnIndex);
-            game.init(xCoordinate, yCoordinate, newXCoordinate, newYCoordinate);
+
+            game.round(game, elements.getCells(), elements.getCheckers(), elements.getActualCheckers(),
+                    elements.getFirstRound(), xCoordinate, yCoordinate, newXCoordinate, newYCoordinate);
         }
     }
+
+
 
     public void pauseAction(KeyEvent event) {
 
         Parent root = new AnchorPane();
 
-        if(event.getCode()==KeyCode.ESCAPE) {
+        if (event.getCode()==KeyCode.ESCAPE) {
             Font applicationFont = new Font("Lucida Bright", 12);
             VBox pauseRoot = new VBox(5);
             Label pauseTitle = new Label();
@@ -132,7 +136,7 @@ public class GameController {
             Stage popupStage = new Stage(StageStyle.TRANSPARENT);
             popupStage.setScene(new Scene(pauseRoot, Color.TRANSPARENT));
 
-            exit.setOnAction(e ->{
+            exit.setOnAction(e -> {
                 Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "", ButtonType.YES, ButtonType.NO);
                 Text header = new Text();
                 header.setFont(applicationFont);
@@ -142,11 +146,9 @@ public class GameController {
                 ((Button) alert.getDialogPane().lookupButton(ButtonType.NO)).setFont(applicationFont);
 
                 Optional<ButtonType> result = alert.showAndWait();
-                if(result.get() == ButtonType.YES)
-                {
+                if (result.get() == ButtonType.YES) {
                     Platform.exit();
                 }
-
                 alert.show();
             });
 
@@ -165,6 +167,7 @@ public class GameController {
 
 
     public void initialize() {
+        elements = game.init(game);
         labelOne = playerOneText;
         labelTwo = playerTwoText;
         labelStatus = statusText;
