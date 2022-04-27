@@ -38,8 +38,12 @@ public class GameController {
     public int newYCoordinate;
     public Node circle;
     public Game game = new Game();
-    public Elements elements = new Elements(game.init(game).getCheckers(), game.init(game).getCells(),
-            game.init(game).getFirstRound(), game.init(game).getActualCheckers());
+    public Cell[][] cells = game.createCells();
+    public Checker[][] checkers = game.createCheckersOnCells(cells);
+    public Checker[][] actualCheckers = checkers;
+    public int firstRound = 1;
+    public static final String WHITE_COLOR = "white";
+    public static final String BLACK_COLOR = "black";
 
     @FXML
     public Label playerOneText;
@@ -98,11 +102,34 @@ public class GameController {
             GridPane.setRowIndex(circle, rowIndex);
             GridPane.setColumnIndex(circle, columnIndex);
 
-            game.round(game, elements.getCells(), elements.getCheckers(), elements.getActualCheckers(),
-                    elements.getFirstRound(), xCoordinate, yCoordinate, newXCoordinate, newYCoordinate);
+            checkers = actualCheckers;
+
+            if (checkers[xCoordinate][yCoordinate].getColor().equals(WHITE_COLOR)) {
+                actualCheckers = game.move(cells, actualCheckers, xCoordinate, yCoordinate, newXCoordinate,
+                        newYCoordinate, firstRound);
+            }
+            for (int i = 0; i < 8; i++) {
+                for (int n = 0; n < 8; n++) {
+                    if(actualCheckers[i][n]!=null) {
+                        System.out.println(actualCheckers[i][n]);
+                    }
+                }
+            }
+            if (actualCheckers[xCoordinate][yCoordinate].getColor().equals(BLACK_COLOR)) {
+                actualCheckers = game.move(cells, actualCheckers, xCoordinate, yCoordinate, newXCoordinate,
+                        newYCoordinate, firstRound);
+                }
+            firstRound = 0;
+            for (int i = 0; i < 8; i++) {
+                for (int n = 0; n < 8; n++) {
+                    if(actualCheckers[i][n]!=null) {
+                        System.out.println(actualCheckers[i][n]);
+                    }
+                }
+            }
+
         }
     }
-
 
 
     public void pauseAction(KeyEvent event) {
@@ -167,7 +194,6 @@ public class GameController {
 
 
     public void initialize() {
-        elements = game.init(game);
         labelOne = playerOneText;
         labelTwo = playerTwoText;
         labelStatus = statusText;

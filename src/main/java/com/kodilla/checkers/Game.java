@@ -6,7 +6,7 @@ public class Game {
     private static final String WHITE_COLOR = "white";
     private static final String BLACK_COLOR = "black";
 
-    public Elements init(Game game) {
+    public void init(Game game) {
 
         Cell[][] cells;
         Checker[][] checkers;
@@ -20,7 +20,6 @@ public class Game {
         board.setReady(true);
         actualCheckers = checkers;
         int firstRound = 1;
-        return new Elements(checkers, cells, firstRound, actualCheckers);
     }
 
     public void round(Game game, Cell[][] cells, Checker[][] checkers, Checker[][] actualCheckers, int firstRound,
