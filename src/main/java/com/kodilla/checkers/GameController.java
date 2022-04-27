@@ -22,7 +22,6 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-
 import java.util.Optional;
 
 public class GameController {
@@ -38,6 +37,7 @@ public class GameController {
     public int newXCoordinate;
     public int newYCoordinate;
     public Node circle;
+    public Game game = new Game();
 
     @FXML
     public Label playerOneText;
@@ -55,6 +55,7 @@ public class GameController {
     }
 
     public void mouseChooseChecker(MouseEvent e) {
+
         circle = (Node) e.getSource();
         Integer columnIndex = GridPane.getColumnIndex(circle);
         Integer rowIndex = GridPane.getRowIndex(circle);
@@ -96,6 +97,7 @@ public class GameController {
             System.out.println(columnIndex + " " + rowIndex);
             GridPane.setRowIndex(circle, rowIndex);
             GridPane.setColumnIndex(circle, columnIndex);
+            game.init(xCoordinate, yCoordinate, newXCoordinate, newYCoordinate);
         }
     }
 

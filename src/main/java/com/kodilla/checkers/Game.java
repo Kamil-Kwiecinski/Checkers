@@ -3,7 +3,10 @@ package com.kodilla.checkers;
 
 public class Game extends GameController{
 
-    public void init() {
+    private static final String WHITE_COLOR = "white";
+    private static final String BLACK_COLOR = "black";
+
+    public void init(int oldX, int oldY, int newX, int newY) {
         Game game = new Game();
 
         Cell[][] cells;
@@ -21,23 +24,21 @@ public class Game extends GameController{
         board.setReady(true);
         actualCheckers = checkers;
 
-        GameController gameController = null;
-
-        round(game, cells, checkers, actualCheckers, end, isTrue, firstRound, gameController);
+        round(game, cells, checkers, actualCheckers, end, isTrue, firstRound, oldX, oldY, newX, newY);
     }
 
     private static void round(Game game, Cell[][] cells, Checker[][] checkers, Checker[][] actualCheckers, boolean end,
-                              boolean isTrue, int firstRound, GameController gameController) {
+                              boolean isTrue, int firstRound, int oldX, int oldY, int newX, int newY) {
         while(!end) {
             labelStatus.setText("Whites move.");
-            int xCoordinate = gameController.xCoordinate;;
-            int yCoordinate = gameController.yCoordinate;
-            int newXCoordinate = gameController.newXCoordinate;
-            int newYCoordinate = gameController.newYCoordinate;
+            int xCoordinate = oldX;
+            int yCoordinate = oldY;
+            int newXCoordinate = newX;
+            int newYCoordinate = newY;
 
 
             while(!isTrue) {
-                if (actualCheckers[xCoordinate][yCoordinate].getColor().equals("white")) {
+                if (actualCheckers[xCoordinate][yCoordinate].getColor().equals(WHITE_COLOR)) {
                     actualCheckers = game.move(cells, checkers, xCoordinate, yCoordinate, newXCoordinate,
                             newYCoordinate, firstRound);
                     isTrue = true;
@@ -54,14 +55,14 @@ public class Game extends GameController{
                 }
             }
 
-//            labelStatus.setText("Blacks move.");
-            xCoordinate = gameController.xCoordinate;
-            yCoordinate = gameController.yCoordinate;
-            newXCoordinate = gameController.newXCoordinate;
-            newYCoordinate = gameController.newYCoordinate;
+            labelStatus.setText("Blacks move.");
+//            xCoordinate = gameController.xCoordinate;
+//            yCoordinate = gameController.yCoordinate;
+//            newXCoordinate = gameController.newXCoordinate;
+//            newYCoordinate = gameController.newYCoordinate;
 
             while(!isTrue) {
-                if (actualCheckers[xCoordinate][yCoordinate].getColor().equals("black")) {
+                if (actualCheckers[xCoordinate][yCoordinate].getColor().equals(BLACK_COLOR)) {
                     actualCheckers = game.move(cells, actualCheckers, xCoordinate, yCoordinate, newXCoordinate,
                             newYCoordinate, firstRound);
                     isTrue = true;
@@ -71,8 +72,8 @@ public class Game extends GameController{
             }
 
             firstRound = 0;
-            System.out.println(game.howManyColorCheckers(actualCheckers, "white"));
-            System.out.println(game.howManyColorCheckers(actualCheckers, "black"));
+            System.out.println(game.howManyColorCheckers(actualCheckers, WHITE_COLOR));
+            System.out.println(game.howManyColorCheckers(actualCheckers, BLACK_COLOR));
 
             for (int i = 0; i < 8; i++) {
                 for (int n = 0; n < 8; n++) {
@@ -82,12 +83,10 @@ public class Game extends GameController{
                 }
             }
 
-            if (game.howManyColorCheckers(actualCheckers, "white") == 0) {
+            if (game.howManyColorCheckers(actualCheckers, WHITE_COLOR) == 0) {
                 System.out.println("Whites lose.");
-                //quit
-            } else if (game.howManyColorCheckers(actualCheckers, "black") == 0) {
+            } else if (game.howManyColorCheckers(actualCheckers, BLACK_COLOR) == 0) {
                 System.out.println("Blacks lose.");
-                //quit
             }
         }
     }
@@ -96,24 +95,24 @@ public class Game extends GameController{
         Cell[][] cells = new Cell[8][8];
         for (int y = 0; y < 8; y++) {
             for (int x = 0; x < 8; x = x + 2) {
-                cells[x][y] = new Cell(true, x, y, "black", "");
+                cells[x][y] = new Cell(true, x, y, BLACK_COLOR, "");
             }
         }
         for (int y = 0; y < 8; y++) {
             for (int x = 1; x < 8; x = x + 2) {
-                cells[x][y] = new Cell(true, x, y, "white", "");
+                cells[x][y] = new Cell(true, x, y, WHITE_COLOR, "");
             }
         }
         for (int y = 0; y < 3; y++) {
             for (int x = 0; x < 8; x++) {
                 if ((x + y) % 2 == 0)
-                    cells[x][y].setStartPosition("white");
+                    cells[x][y].setStartPosition(WHITE_COLOR);
             }
         }
         for (int y = 5; y < 8; y++) {
             for (int x = 0; x < 8; x++) {
                 if ((x + y) % 2 == 0)
-                    cells[x][y].setStartPosition("black");
+                    cells[x][y].setStartPosition(BLACK_COLOR);
             }
         }
         return cells;
@@ -124,9 +123,9 @@ public class Game extends GameController{
         int counter = 0;
         for (int y = 0; y < 8; y++) {
             for (int x = 0; x < 8; x++) {
-                if (cells[x][y].getStartPosition().equals("white")) {
+                if (cells[x][y].getStartPosition().equals(WHITE_COLOR)) {
                     counter++;
-                    checkers[x][y] = new Checker(counter, "white", false, false, x, y);
+                    checkers[x][y] = new Checker(counter, WHITE_COLOR, false, false, x, y);
                     cells[x][y].setEmpty(false);
                 }
             }
@@ -134,9 +133,9 @@ public class Game extends GameController{
 
         for (int y = 0; y < 8; y++) {
             for (int x = 0; x < 8; x++) {
-                if (cells[x][y].getStartPosition().equals("black")) {
+                if (cells[x][y].getStartPosition().equals(BLACK_COLOR)) {
                     counter++;
-                    checkers[x][y] = new Checker(counter, "black", false, false, x, y);
+                    checkers[x][y] = new Checker(counter, BLACK_COLOR, false, false, x, y);
                     cells[x][y].setEmpty(false);
                 }
             }
@@ -333,13 +332,13 @@ public class Game extends GameController{
         int enemyXPosition = enemyChecker.getEnemyXPosition();
         int enemyYPosition = enemyChecker.getEnemyYPosition();
         temporaryCheckers = game.elimination(enemyXPosition, enemyYPosition, cells, checkers);
-        int howManyWhiteCheckers = game.howManyColorCheckers(temporaryCheckers, "white");
-        int howManyBlackCheckers = game.howManyColorCheckers(temporaryCheckers, "black");
+        int howManyWhiteCheckers = game.howManyColorCheckers(temporaryCheckers, WHITE_COLOR);
+        int howManyBlackCheckers = game.howManyColorCheckers(temporaryCheckers, BLACK_COLOR);
 
         if(howManyWhiteCheckers == 1) {
-            actualCheckers = game.findLastOne(temporaryCheckers, "white");
+            actualCheckers = game.findLastOne(temporaryCheckers, WHITE_COLOR);
         } else if(howManyBlackCheckers == 1) {
-            actualCheckers = game.findLastOne(temporaryCheckers, "black");
+            actualCheckers = game.findLastOne(temporaryCheckers, BLACK_COLOR);
         } else {
             actualCheckers = game.newPosition(cells, newXCoordinate, newYCoordinate, xCoordinate, yCoordinate,
                     temporaryCheckers);
