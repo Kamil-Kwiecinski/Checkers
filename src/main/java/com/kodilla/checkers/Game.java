@@ -145,7 +145,7 @@ public class Game {
     }
 
     public Checker[][] move(Cell[][] cells, Checker[][] checkers, int xCoordinate, int yCoordinate, int newXCoordinate,
-                            int newYCoordinate,int firstRound) {
+                            int newYCoordinate, int firstRound) {
 
         Game game = new Game();
         Checker[][] actualCheckers = new Checker[8][8];
@@ -169,22 +169,24 @@ public class Game {
                         actualCheckers = newCoordinatesIsEmpty(cells, checkers, xCoordinate, yCoordinate,
                                 newXCoordinate, newYCoordinate, game, actualCheckers, enemyChecker, enemyCheckerCounter,
                                 friendlyCheckerCounter);
+                    } else {
+                        if (Math.abs(newXCoordinate - xCoordinate) <= 3) {
+                            if (Math.abs(newYCoordinate - yCoordinate) <= 3) {
+                                if (enemyCheckerCounter > 0) {
+                                    actualCheckers = newCoordinatesIsEmpty(cells, checkers, xCoordinate, yCoordinate, newXCoordinate,
+                                            newYCoordinate, game, actualCheckers, enemyChecker, enemyCheckerCounter,
+                                            friendlyCheckerCounter);
+                                }
+                            }
+                        } else if (Math.abs(newXCoordinate - xCoordinate) <= 1) {
+                            if (Math.abs(newYCoordinate - yCoordinate) <= 1) {
+                                actualCheckers = newCoordinatesIsEmpty(cells, checkers, xCoordinate, yCoordinate, newXCoordinate,
+                                        newYCoordinate, game, actualCheckers, enemyChecker, enemyCheckerCounter,
+                                        friendlyCheckerCounter);
+                            }
+                        }
                     }
                 }
-            }
-        } else if (Math.abs(newXCoordinate - xCoordinate) <= 3) {
-            if (Math.abs(newYCoordinate - yCoordinate) <= 3) {
-                if (enemyCheckerCounter > 0) {
-                    actualCheckers = newCoordinatesIsEmpty(cells, checkers, xCoordinate, yCoordinate, newXCoordinate,
-                            newYCoordinate, game, actualCheckers, enemyChecker, enemyCheckerCounter,
-                            friendlyCheckerCounter);
-                }
-            }
-        } else if (Math.abs(newXCoordinate - xCoordinate) <= 1) {
-            if (Math.abs(newYCoordinate - yCoordinate) <= 1) {
-                actualCheckers = newCoordinatesIsEmpty(cells, checkers, xCoordinate, yCoordinate, newXCoordinate,
-                        newYCoordinate, game, actualCheckers, enemyChecker, enemyCheckerCounter,
-                        friendlyCheckerCounter);
             }
         }
         return actualCheckers;

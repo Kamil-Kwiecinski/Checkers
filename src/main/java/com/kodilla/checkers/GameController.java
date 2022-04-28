@@ -40,7 +40,7 @@ public class GameController {
     public Game game = new Game();
     public Cell[][] cells = game.createCells();
     public Checker[][] checkers = game.createCheckersOnCells(cells);
-    public Checker[][] actualCheckers = checkers;
+    public Checker[][] actualCheckers;
     public int firstRound = 1;
     public static final String WHITE_COLOR = "white";
     public static final String BLACK_COLOR = "black";
@@ -102,28 +102,21 @@ public class GameController {
             GridPane.setRowIndex(circle, rowIndex);
             GridPane.setColumnIndex(circle, columnIndex);
 
-            checkers = actualCheckers;
-
             if (checkers[xCoordinate][yCoordinate].getColor().equals(WHITE_COLOR)) {
-                actualCheckers = game.move(cells, actualCheckers, xCoordinate, yCoordinate, newXCoordinate,
+                checkers = game.move(cells, checkers, xCoordinate, yCoordinate, newXCoordinate,
                         newYCoordinate, firstRound);
             }
-            for (int i = 0; i < 8; i++) {
-                for (int n = 0; n < 8; n++) {
-                    if(actualCheckers[i][n]!=null) {
-                        System.out.println(actualCheckers[i][n]);
-                    }
-                }
-            }
-            if (actualCheckers[xCoordinate][yCoordinate].getColor().equals(BLACK_COLOR)) {
-                actualCheckers = game.move(cells, actualCheckers, xCoordinate, yCoordinate, newXCoordinate,
+
+            if (checkers[xCoordinate][yCoordinate].getColor().equals(BLACK_COLOR)) {
+                checkers = game.move(cells, checkers, xCoordinate, yCoordinate, newXCoordinate,
                         newYCoordinate, firstRound);
                 }
+
             firstRound = 0;
             for (int i = 0; i < 8; i++) {
                 for (int n = 0; n < 8; n++) {
-                    if(actualCheckers[i][n]!=null) {
-                        System.out.println(actualCheckers[i][n]);
+                    if(checkers[i][n]!=null) {
+                        System.out.println(checkers[i][n]);
                     }
                 }
             }
@@ -194,6 +187,7 @@ public class GameController {
 
 
     public void initialize() {
+        actualCheckers = checkers;
         labelOne = playerOneText;
         labelTwo = playerTwoText;
         labelStatus = statusText;
