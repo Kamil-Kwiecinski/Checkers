@@ -9,6 +9,9 @@ import javafx.scene.layout.AnchorPane;
 import java.io.IOException;
 
 public class PlayerVsPlayerController extends GameController{
+    public PlayerVsPlayerController() {
+        super();
+    }
 
     private MainController mainController;
     Player playerOne;

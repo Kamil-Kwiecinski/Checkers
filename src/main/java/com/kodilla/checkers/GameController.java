@@ -18,39 +18,43 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+
 import java.util.Optional;
+
+import static java.lang.String.valueOf;
+import static javafx.scene.paint.Color.BLACK;
+import static javafx.scene.paint.Color.WHITE;
 
 public class GameController {
 
+    public GameController() {
+        initialize();
+    }
+
+    public GridPane gridPane;
     private MainController mainController;
     public static Label labelOne;
     public static Label labelTwo;
-    public static Label labelStatus;
     public static Label labelXCoordinate;
     public static Label labelYCoordinate;
     public int xCoordinate;
     public int yCoordinate;
     public int newXCoordinate;
     public int newYCoordinate;
-    public Node circle;
     public Game game = new Game();
     public Cell[][] cells = game.createCells();
     public Checker[][] checkers = game.createCheckersOnCells(cells);
-    public Checker[][] actualCheckers;
-    public int firstRound = 1;
-    public static final String WHITE_COLOR = "white";
-    public static final String BLACK_COLOR = "black";
+    public int firstRound = 2;
 
     @FXML
     public Label playerOneText;
     @FXML
     public Label playerTwoText;
-    @FXML
-    public Label statusText;
     @FXML
     public Label statusXCoordinate;
     @FXML
@@ -61,9 +65,11 @@ public class GameController {
     }
 
     public void mouseChooseChecker(MouseEvent e) {
-        circle = (Node) e.getSource();
+        Node circle = (Node) e.getSource();
+
         Integer columnIndex = GridPane.getColumnIndex(circle);
         Integer rowIndex = GridPane.getRowIndex(circle);
+
         xCoordinate = columnIndex - 2;
         yCoordinate = Math.abs(rowIndex - 8);
         System.out.println("Mouse entered cell: " + xCoordinate + " " + yCoordinate);
@@ -92,38 +98,46 @@ public class GameController {
 
     public void mouseChoosePlace(MouseEvent e) {
         Node source = (Node) e.getSource();
-        if (source.toString().contains("fill=0xffffffff") == false) {
+        if (source.toString().contains("fill=0x5e5e5eff")) {
             Integer columnIndex = GridPane.getColumnIndex(source);
             Integer rowIndex = GridPane.getRowIndex(source);
             newXCoordinate = columnIndex - 2;
             newYCoordinate = Math.abs(rowIndex - 8);
             System.out.println("Mouse choose cell: " + newXCoordinate + " " + newYCoordinate);
-            System.out.println(columnIndex + " " + rowIndex);
-            GridPane.setRowIndex(circle, rowIndex);
-            GridPane.setColumnIndex(circle, columnIndex);
 
-            if (checkers[xCoordinate][yCoordinate].getColor().equals(WHITE_COLOR)) {
-                checkers = game.move(cells, checkers, xCoordinate, yCoordinate, newXCoordinate,
-                        newYCoordinate, firstRound);
+            for (int i = 103; i > 79; i--) {
+                System.out.println(gridPane.getChildren().get(i));
+                gridPane.getChildren().remove(i);
             }
+            checkers = game.move(cells, checkers, xCoordinate, yCoordinate, newXCoordinate,
+                    newYCoordinate, firstRound);
 
-            if (checkers[xCoordinate][yCoordinate].getColor().equals(BLACK_COLOR)) {
-                checkers = game.move(cells, checkers, xCoordinate, yCoordinate, newXCoordinate,
-                        newYCoordinate, firstRound);
-                }
-
-            firstRound = 0;
             for (int i = 0; i < 8; i++) {
                 for (int n = 0; n < 8; n++) {
-                    if(checkers[i][n]!=null) {
-                        System.out.println(checkers[i][n]);
+                    if (checkers[i][n] != null) {
+                        Circle temporaryCircle = new Circle();
+                        String temporaryId = valueOf(checkers[i][n].getId());
+                        int temporaryX = checkers[i][n].getCurrentPositionX();
+                        int temporaryY = checkers[i][n].getCurrentPositionY();
+                        String temporaryColor = checkers[i][n].getColor();
+                        temporaryCircle.setId(temporaryId);
+                        temporaryCircle.setRadius(24.0);
+
+                        if (temporaryColor.equals("white")) {
+                            temporaryCircle.setFill(WHITE);
+                            GridPane.setConstraints(temporaryCircle, temporaryX + 2, Math.abs(temporaryY - 8));
+
+                        } else if (temporaryColor.equals("black")) {
+                            temporaryCircle.setFill(BLACK);
+                            GridPane.setConstraints(temporaryCircle, temporaryX + 2, Math.abs(temporaryY - 8));
+                        }
+                        gridPane.getChildren().addAll(temporaryCircle);
                     }
                 }
             }
-
         }
+        firstRound--;
     }
-
 
     public void pauseAction(KeyEvent event) {
 
@@ -187,12 +201,9 @@ public class GameController {
 
 
     public void initialize() {
-        actualCheckers = checkers;
         labelOne = playerOneText;
         labelTwo = playerTwoText;
-        labelStatus = statusText;
         labelXCoordinate = statusXCoordinate;
         labelYCoordinate = statusYCoordinate;
     }
-
 }

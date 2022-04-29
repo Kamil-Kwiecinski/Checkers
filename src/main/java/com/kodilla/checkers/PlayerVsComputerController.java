@@ -8,6 +8,10 @@ import javafx.scene.layout.AnchorPane;
 import java.io.IOException;
 
 public class PlayerVsComputerController extends GameController{
+    public PlayerVsComputerController() {
+        super();
+    }
+
     private MainController mainController;
     Player playerOne;
     Player computer;

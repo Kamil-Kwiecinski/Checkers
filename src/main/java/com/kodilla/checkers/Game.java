@@ -154,7 +154,7 @@ public class Game {
         int enemyCheckerCounter = 0;
         int friendlyCheckerCounter = 0;
 
-        if (firstRound == 1) {
+        if (firstRound > 0) {
             if (Math.abs(newXCoordinate - xCoordinate) <= 2) {
                 if (Math.abs(newYCoordinate - yCoordinate) <= 2) {
                   actualCheckers = newCoordinatesIsEmpty(cells, checkers, xCoordinate, yCoordinate, newXCoordinate,
@@ -162,10 +162,13 @@ public class Game {
                           friendlyCheckerCounter);
                 }
             }
-        } else if (firstRound == 0) {
+        } else if (firstRound < 0) {
             for (int i = 0; i < 8; i++) {
                 for (int n = 0; n < 8; n++) {
-                    if (actualCheckers[i][n].isQueen() == true) {
+                    if(checkers[i][n] == null) {
+                        continue;
+                    }
+                    if (checkers[i][n].isQueen() == true) {
                         actualCheckers = newCoordinatesIsEmpty(cells, checkers, xCoordinate, yCoordinate,
                                 newXCoordinate, newYCoordinate, game, actualCheckers, enemyChecker, enemyCheckerCounter,
                                 friendlyCheckerCounter);
@@ -361,29 +364,31 @@ public class Game {
                                    int yCoordinate, Checker[][] checkers) {
         Checker[][] actualCheckers = new Checker[8][8];
 
-        int temporaryId = checkers[xCoordinate][yCoordinate].getId();
-        String temporaryColor = checkers[xCoordinate][yCoordinate].getColor();
-        boolean temporaryEliminated = checkers[xCoordinate][yCoordinate].isEliminated();
-        boolean temporaryQueen = checkers[xCoordinate][yCoordinate].isQueen();
-        Checker temporaryChecker = new Checker(temporaryId, temporaryColor, temporaryEliminated, temporaryQueen,
-                newXCoordinate, newYCoordinate);
+        if (checkers[xCoordinate][yCoordinate] != null) {
+            int temporaryId = checkers[xCoordinate][yCoordinate].getId();
+            String temporaryColor = checkers[xCoordinate][yCoordinate].getColor();
+            boolean temporaryEliminated = checkers[xCoordinate][yCoordinate].isEliminated();
+            boolean temporaryQueen = checkers[xCoordinate][yCoordinate].isQueen();
+            Checker temporaryChecker = new Checker(temporaryId, temporaryColor, temporaryEliminated, temporaryQueen,
+                    newXCoordinate, newYCoordinate);
 
-        cells[newXCoordinate][newYCoordinate].setEmpty(false);
-        cells[xCoordinate][yCoordinate].setEmpty(true);
+            cells[newXCoordinate][newYCoordinate].setEmpty(false);
+            cells[xCoordinate][yCoordinate].setEmpty(true);
 
-        actualCheckers[newXCoordinate][newYCoordinate] = temporaryChecker;
+            actualCheckers[newXCoordinate][newYCoordinate] = temporaryChecker;
 
-        for(int y = 0; y < 8; y++) {
-            for(int x = 0; x < 8; x++) {
-                if(checkers[x][y] != checkers[xCoordinate][yCoordinate]) {
-                    if (checkers[x][y] != null) {
-                        temporaryId = checkers[x][y].getId();
-                        temporaryColor = checkers[x][y].getColor();
-                        temporaryEliminated = checkers[x][y].isEliminated();
-                        temporaryQueen = checkers[x][y].isQueen();
-                        temporaryChecker = new Checker(temporaryId, temporaryColor, temporaryEliminated, temporaryQueen,
-                                x, y);
-                        actualCheckers[x][y] = temporaryChecker;
+            for (int y = 0; y < 8; y++) {
+                for (int x = 0; x < 8; x++) {
+                    if (checkers[x][y] != checkers[xCoordinate][yCoordinate]) {
+                        if (checkers[x][y] != null) {
+                            temporaryId = checkers[x][y].getId();
+                            temporaryColor = checkers[x][y].getColor();
+                            temporaryEliminated = checkers[x][y].isEliminated();
+                            temporaryQueen = checkers[x][y].isQueen();
+                            temporaryChecker = new Checker(temporaryId, temporaryColor, temporaryEliminated, temporaryQueen,
+                                    x, y);
+                            actualCheckers[x][y] = temporaryChecker;
+                        }
                     }
                 }
             }
@@ -426,7 +431,7 @@ public class Game {
         for (int x = 0; x < 8; x++) {
             for (int y = 0; y < 8; y++) {
                 if (checkers[x][y] != null) {
-                    if (checkers[x][y].getColor() == color) {
+                    if (checkers[x][y].getColor().equals(color)) {
                         checkers[x][y].setQueen(true);
                     }
                 }

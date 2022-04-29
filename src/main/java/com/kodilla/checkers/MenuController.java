@@ -21,6 +21,7 @@ public class MenuController {
     @FXML
     public void newGameAction() {
         FXMLLoader loader = new FXMLLoader(this.getClass().getResource("gameModeView.fxml"));
+
         AnchorPane anchorPane = new AnchorPane();
         try {
             anchorPane = loader.load();
