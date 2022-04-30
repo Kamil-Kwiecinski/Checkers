@@ -23,7 +23,6 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-
 import java.util.Optional;
 
 import static java.lang.String.valueOf;
@@ -36,12 +35,12 @@ public class GameController {
         initialize();
     }
 
-    public GridPane gridPane;
     private MainController mainController;
     public static Label labelOne;
     public static Label labelTwo;
     public static Label labelXCoordinate;
     public static Label labelYCoordinate;
+    public static Label statusLabel;
     public int xCoordinate;
     public int yCoordinate;
     public int newXCoordinate;
@@ -49,8 +48,15 @@ public class GameController {
     public Game game = new Game();
     public Cell[][] cells = game.createCells();
     public Checker[][] checkers = game.createCheckersOnCells(cells);
-    public int firstRound = 2;
+    public int rounds = 0;
+    public int totalNumberOfCheckers;
+    public int totalNumberOfWhiteCheckers;
+    public int totalNumberOfBlackCheckers;
 
+    @FXML
+    public GridPane gridPane;
+    @FXML
+    public Label statusText;
     @FXML
     public Label playerOneText;
     @FXML
@@ -65,6 +71,8 @@ public class GameController {
     }
 
     public void mouseChooseChecker(MouseEvent e) {
+
+        System.out.println("mosueCHooseChecker");
         Node circle = (Node) e.getSource();
 
         Integer columnIndex = GridPane.getColumnIndex(circle);
@@ -98,28 +106,38 @@ public class GameController {
 
     public void mouseChoosePlace(MouseEvent e) {
         Node source = (Node) e.getSource();
+
         if (source.toString().contains("fill=0x5e5e5eff")) {
             Integer columnIndex = GridPane.getColumnIndex(source);
             Integer rowIndex = GridPane.getRowIndex(source);
             newXCoordinate = columnIndex - 2;
             newYCoordinate = Math.abs(rowIndex - 8);
             System.out.println("Mouse choose cell: " + newXCoordinate + " " + newYCoordinate);
-
+//                  79 + totalNumberOfCheckers
             for (int i = 103; i > 79; i--) {
                 System.out.println(gridPane.getChildren().get(i));
                 gridPane.getChildren().remove(i);
             }
+            System.out.println("oldx" + xCoordinate);
+            System.out.println("oldy" + yCoordinate);
+            System.out.println("x" + newXCoordinate);
+            System.out.println("y" + newYCoordinate);
             checkers = game.move(cells, checkers, xCoordinate, yCoordinate, newXCoordinate,
-                    newYCoordinate, firstRound);
+                    newYCoordinate, rounds);
 
             for (int i = 0; i < 8; i++) {
                 for (int n = 0; n < 8; n++) {
                     if (checkers[i][n] != null) {
+                        System.out.println(checkers[i][n]);
                         Circle temporaryCircle = new Circle();
                         String temporaryId = valueOf(checkers[i][n].getId());
+                        System.out.println(temporaryId);
                         int temporaryX = checkers[i][n].getCurrentPositionX();
+                        System.out.println(temporaryX);
                         int temporaryY = checkers[i][n].getCurrentPositionY();
+                        System.out.println(temporaryY);
                         String temporaryColor = checkers[i][n].getColor();
+                        System.out.println(temporaryColor);
                         temporaryCircle.setId(temporaryId);
                         temporaryCircle.setRadius(24.0);
 
@@ -131,12 +149,30 @@ public class GameController {
                             temporaryCircle.setFill(BLACK);
                             GridPane.setConstraints(temporaryCircle, temporaryX + 2, Math.abs(temporaryY - 8));
                         }
-                        gridPane.getChildren().addAll(temporaryCircle);
+                        System.out.println(temporaryCircle);
+                        gridPane.getChildren().add(temporaryCircle);
                     }
                 }
             }
         }
-        firstRound--;
+        totalNumberOfWhiteCheckers = game.howManyColorCheckers(checkers, "white");
+        totalNumberOfBlackCheckers = game.howManyColorCheckers(checkers, "black");
+
+        if (totalNumberOfWhiteCheckers == 0) {
+            statusText.setText("Blacks won.");
+        } else if (totalNumberOfBlackCheckers == 0) {
+            statusText.setText("Whites won");
+        }
+        totalNumberOfCheckers =  totalNumberOfWhiteCheckers + totalNumberOfBlackCheckers;
+
+        System.out.println(totalNumberOfCheckers);
+        System.out.println(rounds);
+        rounds++;
+        if (rounds % 2 == 0) {
+            statusText.setText("Whites move.");
+        } else {
+            statusText.setText("Blacks move.");
+        }
     }
 
     public void pauseAction(KeyEvent event) {
@@ -199,8 +235,8 @@ public class GameController {
         }
     }
 
-
     public void initialize() {
+        statusLabel = statusText;
         labelOne = playerOneText;
         labelTwo = playerTwoText;
         labelXCoordinate = statusXCoordinate;

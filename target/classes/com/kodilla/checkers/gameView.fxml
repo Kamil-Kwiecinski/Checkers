@@ -245,21 +245,26 @@
             <Font name="Lucida Bright" size="12.0" />
          </font>
       </Label>
-      <Label fx:id="statusCoordinate" layoutX="529.0" layoutY="13.0" prefHeight="32.0" prefWidth="89.0" text="Checker's coordinates:" wrapText="true">
+      <Label fx:id="statusCoordinate" layoutX="529.0" layoutY="7.0" prefHeight="32.0" prefWidth="89.0" text="Checker's coordinates:" wrapText="true">
          <font>
             <Font name="Lucida Bright" size="12.0" />
          </font>
       </Label>
-      <Label fx:id="statusXCoordinate" layoutX="552.0" layoutY="57.0" prefHeight="32.0" prefWidth="17.0" text="X" wrapText="true">
+      <Label fx:id="statusXCoordinate" layoutX="556.0" layoutY="41.0" prefHeight="32.0" prefWidth="17.0" text="X" wrapText="true">
          <font>
             <Font name="Lucida Bright" size="12.0" />
          </font>
       </Label>
-      <Label fx:id="statusYCoordinate" layoutX="565.0" layoutY="57.0" prefHeight="32.0" prefWidth="17.0" text="Y" wrapText="true">
+      <Label fx:id="statusYCoordinate" layoutX="573.0" layoutY="41.0" prefHeight="32.0" prefWidth="17.0" text="Y" wrapText="true">
          <font>
             <Font name="Lucida Bright" size="12.0" />
          </font>
       </Label>
       <Button layoutX="27.0" layoutY="447.0" mnemonicParsing="false" onAction="#pauseAction" onKeyPressed="#pauseAction" text="Pause" />
+      <Label fx:id="statusText" layoutX="265.0" layoutY="7.0" prefHeight="32.0" prefWidth="89.0" text="Whites move." textAlignment="CENTER" wrapText="true">
+         <font>
+            <Font name="Lucida Bright" size="12.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>
