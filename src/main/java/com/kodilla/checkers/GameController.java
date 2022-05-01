@@ -1,7 +1,6 @@
 package com.kodilla.checkers;
 
 import javafx.application.Platform;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -154,8 +153,8 @@ public class GameController {
                             rounds++;
                         }
 
-                    } else if ((Math.abs(newXCoordinate - xCoordinate) == 3)
-                            && (Math.abs(newYCoordinate - yCoordinate) == 3)) {
+                    } else if ((Math.abs(newXCoordinate - xCoordinate) == 2)
+                            && (Math.abs(newYCoordinate - yCoordinate) == 2)) {
                         if ((!cells[xCoordinate + 1][yCoordinate + 1].isEmpty())
                                 && !checkers[xCoordinate + 1][yCoordinate + 1].getColor().equals(choosenCircleColor)) {
                             deleteAndCreateCircles();
@@ -199,7 +198,7 @@ public class GameController {
 
     private void deleteAndCreateCircles() {
         checkers = game.move(cells, checkers, xCoordinate, yCoordinate, newXCoordinate,
-                newYCoordinate, rounds);
+                newYCoordinate);
 
         for (int i = 79 + totalNumberOfCheckers; i > 79; i--) {
             gridPane.getChildren().remove(i);
