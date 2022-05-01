@@ -1,6 +1,7 @@
 package com.kodilla.checkers;
 
 import javafx.application.Platform;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -23,6 +24,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+
 import java.util.Optional;
 
 import static java.lang.String.valueOf;
@@ -48,10 +50,12 @@ public class GameController {
     public Game game = new Game();
     public Cell[][] cells = game.createCells();
     public Checker[][] checkers = game.createCheckersOnCells(cells);
-    public int rounds = 0;
-    public int totalNumberOfCheckers;
+    public int rounds = 1;
+    public int totalNumberOfCheckers = 24;
     public int totalNumberOfWhiteCheckers;
     public int totalNumberOfBlackCheckers;
+    public Node circle;
+    String actualColor = "0xffffffff";
 
     @FXML
     public GridPane gridPane;
@@ -72,40 +76,43 @@ public class GameController {
 
     public void mouseChooseChecker(MouseEvent e) {
 
-        System.out.println("mosueCHooseChecker");
-        Node circle = (Node) e.getSource();
+        circle = (Node) e.getSource();
 
-        Integer columnIndex = GridPane.getColumnIndex(circle);
-        Integer rowIndex = GridPane.getRowIndex(circle);
+        if (circle.toString().contains(actualColor)) {
 
-        xCoordinate = columnIndex - 2;
-        yCoordinate = Math.abs(rowIndex - 8);
-        System.out.println("Mouse entered cell: " + xCoordinate + " " + yCoordinate);
+            Integer columnIndex = GridPane.getColumnIndex(circle);
+            Integer rowIndex = GridPane.getRowIndex(circle);
 
-        String numberY = rowIndex.toString();
-        statusYCoordinate.setText(numberY);
+            xCoordinate = columnIndex - 2;
+            yCoordinate = Math.abs(rowIndex - 8);
+            System.out.println("Mouse entered cell: " + xCoordinate + " " + yCoordinate);
 
-        if (columnIndex == 2) {
-            statusXCoordinate.setText("A");
-        } else if (columnIndex == 3) {
-            statusXCoordinate.setText("B");
-        } else if (columnIndex == 4) {
-            statusXCoordinate.setText("C");
-        } else if (columnIndex == 5) {
-            statusXCoordinate.setText("D");
-        } else if (columnIndex == 6) {
-            statusXCoordinate.setText("E");
-        } else if (columnIndex == 7) {
-            statusXCoordinate.setText("F");
-        } else if (columnIndex == 8) {
-            statusXCoordinate.setText("G");
-        } else if (columnIndex == 9) {
-            statusXCoordinate.setText("H");
+            String numberY = rowIndex.toString();
+            statusYCoordinate.setText(numberY);
+
+            if (columnIndex == 2) {
+                statusXCoordinate.setText("A");
+            } else if (columnIndex == 3) {
+                statusXCoordinate.setText("B");
+            } else if (columnIndex == 4) {
+                statusXCoordinate.setText("C");
+            } else if (columnIndex == 5) {
+                statusXCoordinate.setText("D");
+            } else if (columnIndex == 6) {
+                statusXCoordinate.setText("E");
+            } else if (columnIndex == 7) {
+                statusXCoordinate.setText("F");
+            } else if (columnIndex == 8) {
+                statusXCoordinate.setText("G");
+            } else if (columnIndex == 9) {
+                statusXCoordinate.setText("H");
+            }
         }
     }
 
     public void mouseChoosePlace(MouseEvent e) {
         Node source = (Node) e.getSource();
+        String choosenCircleColor = "";
 
         if (source.toString().contains("fill=0x5e5e5eff")) {
             Integer columnIndex = GridPane.getColumnIndex(source);
@@ -113,79 +120,136 @@ public class GameController {
             newXCoordinate = columnIndex - 2;
             newYCoordinate = Math.abs(rowIndex - 8);
             System.out.println("Mouse choose cell: " + newXCoordinate + " " + newYCoordinate);
-//                  79 + totalNumberOfCheckers
-            for (int i = 103; i > 79; i--) {
-                System.out.println(gridPane.getChildren().get(i));
-                gridPane.getChildren().remove(i);
+
+            if (circle.toString().contains("0xffffffff")) {
+                choosenCircleColor = "white";
+            } else if (circle.toString().contains("0x000000ff")) {
+                choosenCircleColor = "black";
             }
-            System.out.println("oldx" + xCoordinate);
-            System.out.println("oldy" + yCoordinate);
-            System.out.println("x" + newXCoordinate);
-            System.out.println("y" + newYCoordinate);
-            checkers = game.move(cells, checkers, xCoordinate, yCoordinate, newXCoordinate,
-                    newYCoordinate, rounds);
 
-            for (int i = 0; i < 8; i++) {
-                for (int n = 0; n < 8; n++) {
-                    if (checkers[i][n] != null) {
-                        System.out.println(checkers[i][n]);
-                        Circle temporaryCircle = new Circle();
-                        String temporaryId = valueOf(checkers[i][n].getId());
-                        System.out.println(temporaryId);
-                        int temporaryX = checkers[i][n].getCurrentPositionX();
-                        System.out.println(temporaryX);
-                        int temporaryY = checkers[i][n].getCurrentPositionY();
-                        System.out.println(temporaryY);
-                        String temporaryColor = checkers[i][n].getColor();
-                        System.out.println(temporaryColor);
-                        temporaryCircle.setId(temporaryId);
-                        temporaryCircle.setRadius(24.0);
+            if (rounds <= 2
+                    && Math.abs(newXCoordinate - xCoordinate) <= 2
+                    && Math.abs(newYCoordinate - yCoordinate) <= 2) {
+                deleteAndCreateCircles();
+                rounds++;
 
-                        if (temporaryColor.equals("white")) {
-                            temporaryCircle.setFill(WHITE);
-                            GridPane.setConstraints(temporaryCircle, temporaryX + 2, Math.abs(temporaryY - 8));
-
-                        } else if (temporaryColor.equals("black")) {
-                            temporaryCircle.setFill(BLACK);
-                            GridPane.setConstraints(temporaryCircle, temporaryX + 2, Math.abs(temporaryY - 8));
+            } else if (rounds > 2) {
+                if (checkers[xCoordinate][yCoordinate].isQueen()) {
+                    deleteAndCreateCircles();
+                    rounds++;
+                } else {
+                    if ((Math.abs(newXCoordinate - xCoordinate) == 1)
+                            && (Math.abs(newYCoordinate - yCoordinate) == 1)) {
+                        if (cells[xCoordinate + 1][yCoordinate + 1].isEmpty()) {
+                            deleteAndCreateCircles();
+                            rounds++;
+                        } else if (cells[xCoordinate + 1][yCoordinate - 1].isEmpty()) {
+                            deleteAndCreateCircles();
+                            rounds++;
+                        } else if (cells[xCoordinate - 1][yCoordinate + 1].isEmpty()) {
+                            deleteAndCreateCircles();
+                            rounds++;
+                        } else if (cells[xCoordinate - 1][yCoordinate - 1].isEmpty()) {
+                            deleteAndCreateCircles();
+                            rounds++;
                         }
-                        System.out.println(temporaryCircle);
-                        gridPane.getChildren().add(temporaryCircle);
+
+                    } else if ((Math.abs(newXCoordinate - xCoordinate) == 3)
+                            && (Math.abs(newYCoordinate - yCoordinate) == 3)) {
+                        if ((!cells[xCoordinate + 1][yCoordinate + 1].isEmpty())
+                                && !checkers[xCoordinate + 1][yCoordinate + 1].getColor().equals(choosenCircleColor)) {
+                            deleteAndCreateCircles();
+                            rounds++;
+                        } else if ((!cells[xCoordinate + 1][yCoordinate - 1].isEmpty())
+                                && !checkers[xCoordinate + 1][yCoordinate - 1].getColor().equals(choosenCircleColor)) {
+                            deleteAndCreateCircles();
+                            rounds++;
+                        } else if ((!cells[xCoordinate - 1][yCoordinate + 1].isEmpty())
+                                && !checkers[xCoordinate - 1][yCoordinate + 1].getColor().equals(choosenCircleColor)) {
+                            deleteAndCreateCircles();
+                            rounds++;
+                        } else if ((!cells[xCoordinate - 1][yCoordinate - 1].isEmpty())
+                                && !checkers[xCoordinate - 1][yCoordinate - 1].getColor().equals(choosenCircleColor)) {
+                            deleteAndCreateCircles();
+                            rounds++;
+                        }
                     }
                 }
             }
         }
+
         totalNumberOfWhiteCheckers = game.howManyColorCheckers(checkers, "white");
         totalNumberOfBlackCheckers = game.howManyColorCheckers(checkers, "black");
+        totalNumberOfCheckers = totalNumberOfWhiteCheckers + totalNumberOfBlackCheckers;
 
         if (totalNumberOfWhiteCheckers == 0) {
             statusText.setText("Blacks won.");
         } else if (totalNumberOfBlackCheckers == 0) {
             statusText.setText("Whites won");
         }
-        totalNumberOfCheckers =  totalNumberOfWhiteCheckers + totalNumberOfBlackCheckers;
 
-        System.out.println(totalNumberOfCheckers);
-        System.out.println(rounds);
-        rounds++;
         if (rounds % 2 == 0) {
-            statusText.setText("Whites move.");
-        } else {
             statusText.setText("Blacks move.");
+            actualColor = "0x000000ff";
+        } else {
+            statusText.setText("White move.");
+            actualColor = "0xffffffff";
         }
+    }
+
+    private void deleteAndCreateCircles() {
+        checkers = game.move(cells, checkers, xCoordinate, yCoordinate, newXCoordinate,
+                newYCoordinate, rounds);
+
+        for (int i = 79 + totalNumberOfCheckers; i > 79; i--) {
+            gridPane.getChildren().remove(i);
+        }
+
+        for (int i = 0; i < 8; i++) {
+            for (int n = 0; n < 8; n++) {
+                if (checkers[i][n] != null) {
+                    System.out.println(checkers[i][n]);
+                    createNewCircle(i, n);
+                }
+            }
+        }
+    }
+
+    private void createNewCircle(int i, int n) {
+        Circle temporaryCircle = new Circle();
+        String temporaryId = valueOf(checkers[i][n].getId());
+        int temporaryX = checkers[i][n].getCurrentPositionX();
+        int temporaryY = checkers[i][n].getCurrentPositionY();
+        String temporaryColor = checkers[i][n].getColor();
+
+        temporaryCircle.setId(temporaryId);
+        temporaryCircle.setRadius(24.0);
+        temporaryCircle.setOnMousePressed(z -> {
+            mouseChooseChecker(z);
+        });
+
+        if (temporaryColor.equals("white")) {
+            temporaryCircle.setFill(WHITE);
+            GridPane.setConstraints(temporaryCircle, temporaryX + 2, Math.abs(temporaryY - 8));
+
+        } else if (temporaryColor.equals("black")) {
+            temporaryCircle.setFill(BLACK);
+            GridPane.setConstraints(temporaryCircle, temporaryX + 2, Math.abs(temporaryY - 8));
+        }
+        gridPane.getChildren().add(temporaryCircle);
     }
 
     public void pauseAction(KeyEvent event) {
 
         Parent root = new AnchorPane();
 
-        if (event.getCode()==KeyCode.ESCAPE) {
+        if (event.getCode() == KeyCode.ESCAPE) {
             Font applicationFont = new Font("Lucida Bright", 12);
             VBox pauseRoot = new VBox(5);
             Label pauseTitle = new Label();
             pauseTitle.setText("Paused");
 
-            pauseTitle.setFont(new Font("Lucida Bright", 24) );
+            pauseTitle.setFont(new Font("Lucida Bright", 24));
             pauseRoot.getChildren().add(pauseTitle);
             pauseRoot.setStyle("-fx-background-color: rgba(255, 255, 255, 1.0);");
             pauseRoot.setAlignment(Pos.CENTER);

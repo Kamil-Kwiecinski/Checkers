@@ -209,30 +209,30 @@
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#5e5e5e" height="50.0" onMousePressed="#mouseChoosePlace" stroke="BLACK" strokeType="INSIDE" width="50.0" GridPane.columnIndex="8" GridPane.rowIndex="8" />
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="50.0" onMousePressed="#mouseChoosePlace" stroke="BLACK" strokeType="INSIDE" width="50.0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#5e5e5e" height="50.0" onMousePressed="#mouseChoosePlace" stroke="BLACK" strokeType="INSIDE" width="50.0" GridPane.columnIndex="3" GridPane.rowIndex="1" />
-            <Circle fx:id="1" fill="WHITE" onMousePressed="#mouseChooseChecker" radius="24.0" stroke="BLACK" GridPane.columnIndex="2" GridPane.rowIndex="8" />
-            <Circle fx:id="2" fill="WHITE" onMousePressed="#mouseChooseChecker" radius="24.0" stroke="BLACK" GridPane.columnIndex="4" GridPane.rowIndex="8" />
-            <Circle fx:id="3" fill="WHITE" onMousePressed="#mouseChooseChecker" radius="24.0" stroke="BLACK" GridPane.columnIndex="6" GridPane.rowIndex="8" />
-            <Circle fx:id="4" fill="WHITE" onMousePressed="#mouseChooseChecker" radius="24.0" stroke="BLACK" GridPane.columnIndex="8" GridPane.rowIndex="8" />
-            <Circle fx:id="5" fill="WHITE" onMousePressed="#mouseChooseChecker" radius="24.0" stroke="BLACK" GridPane.columnIndex="3" GridPane.rowIndex="7" />
-            <Circle fx:id="6" fill="WHITE" onMousePressed="#mouseChooseChecker" radius="24.0" stroke="BLACK" GridPane.columnIndex="5" GridPane.rowIndex="7" />
-            <Circle fx:id="7" fill="WHITE" onMousePressed="#mouseChooseChecker" radius="24.0" stroke="BLACK" GridPane.columnIndex="7" GridPane.rowIndex="7" />
-            <Circle fx:id="8" fill="WHITE" onMousePressed="#mouseChooseChecker" radius="24.0" stroke="BLACK" GridPane.columnIndex="9" GridPane.rowIndex="7" />
-            <Circle fx:id="9" fill="WHITE" onMousePressed="#mouseChooseChecker" radius="24.0" stroke="BLACK" GridPane.columnIndex="2" GridPane.rowIndex="6" />
-            <Circle fx:id="10" fill="WHITE" onMousePressed="#mouseChooseChecker" radius="24.0" stroke="BLACK" GridPane.columnIndex="4" GridPane.rowIndex="6" />
-            <Circle fx:id="11" fill="WHITE" onMousePressed="#mouseChooseChecker" radius="24.0" stroke="BLACK" GridPane.columnIndex="6" GridPane.rowIndex="6" />
-            <Circle fx:id="12" fill="WHITE" onMousePressed="#mouseChooseChecker" radius="24.0" stroke="BLACK" GridPane.columnIndex="8" GridPane.rowIndex="6" />
-            <Circle fx:id="13" fill="BLACK" onMousePressed="#mouseChooseChecker" radius="24.0" stroke="BLACK" GridPane.columnIndex="3" GridPane.rowIndex="3" />
-            <Circle fx:id="14" fill="BLACK" onMousePressed="#mouseChooseChecker" radius="24.0" stroke="BLACK" GridPane.columnIndex="5" GridPane.rowIndex="3" />
-            <Circle fx:id="15" fill="BLACK" onMousePressed="#mouseChooseChecker" radius="24.0" stroke="BLACK" GridPane.columnIndex="7" GridPane.rowIndex="3" />
-            <Circle fx:id="16" fill="BLACK" onMousePressed="#mouseChooseChecker" radius="24.0" stroke="BLACK" GridPane.columnIndex="9" GridPane.rowIndex="3" />
-            <Circle fx:id="17" fill="BLACK" onMousePressed="#mouseChooseChecker" radius="24.0" stroke="BLACK" GridPane.columnIndex="2" GridPane.rowIndex="2" />
-            <Circle fx:id="18" fill="BLACK" onMousePressed="#mouseChooseChecker" radius="24.0" stroke="BLACK" GridPane.columnIndex="4" GridPane.rowIndex="2" />
-            <Circle fx:id="19" fill="BLACK" onMousePressed="#mouseChooseChecker" radius="24.0" stroke="BLACK" GridPane.columnIndex="6" GridPane.rowIndex="2" />
-            <Circle fx:id="20" fill="BLACK" onMousePressed="#mouseChooseChecker" radius="24.0" stroke="BLACK" GridPane.columnIndex="8" GridPane.rowIndex="2" />
-            <Circle fx:id="21" fill="BLACK" onMousePressed="#mouseChooseChecker" radius="24.0" stroke="BLACK" GridPane.columnIndex="3" GridPane.rowIndex="1" />
-            <Circle fx:id="22" fill="BLACK" onMousePressed="#mouseChooseChecker" radius="24.0" stroke="BLACK" GridPane.columnIndex="5" GridPane.rowIndex="1" />
-            <Circle fx:id="23" fill="BLACK" onMousePressed="#mouseChooseChecker" radius="24.0" stroke="BLACK" GridPane.columnIndex="7" GridPane.rowIndex="1" />
-            <Circle fx:id="24" fill="BLACK" onMousePressed="#mouseChooseChecker" radius="24.0" stroke="BLACK" GridPane.columnIndex="9" GridPane.rowIndex="1" />
+            <Circle fx:id="1" fill="WHITE" onMousePressed="#mouseChooseChecker" radius="24.0" GridPane.columnIndex="2" GridPane.rowIndex="8" />
+            <Circle fx:id="2" fill="WHITE" onMousePressed="#mouseChooseChecker" radius="24.0" GridPane.columnIndex="4" GridPane.rowIndex="8" />
+            <Circle fx:id="3" fill="WHITE" onMousePressed="#mouseChooseChecker" radius="24.0" GridPane.columnIndex="6" GridPane.rowIndex="8" />
+            <Circle fx:id="4" fill="WHITE" onMousePressed="#mouseChooseChecker" radius="24.0" GridPane.columnIndex="8" GridPane.rowIndex="8" />
+            <Circle fx:id="5" fill="WHITE" onMousePressed="#mouseChooseChecker" radius="24.0" GridPane.columnIndex="3" GridPane.rowIndex="7" />
+            <Circle fx:id="6" fill="WHITE" onMousePressed="#mouseChooseChecker" radius="24.0" GridPane.columnIndex="5" GridPane.rowIndex="7" />
+            <Circle fx:id="7" fill="WHITE" onMousePressed="#mouseChooseChecker" radius="24.0" GridPane.columnIndex="7" GridPane.rowIndex="7" />
+            <Circle fx:id="8" fill="WHITE" onMousePressed="#mouseChooseChecker" radius="24.0" GridPane.columnIndex="9" GridPane.rowIndex="7" />
+            <Circle fx:id="9" fill="WHITE" onMousePressed="#mouseChooseChecker" radius="24.0" GridPane.columnIndex="2" GridPane.rowIndex="6" />
+            <Circle fx:id="10" fill="WHITE" onMousePressed="#mouseChooseChecker" radius="24.0" GridPane.columnIndex="4" GridPane.rowIndex="6" />
+            <Circle fx:id="11" fill="WHITE" onMousePressed="#mouseChooseChecker" radius="24.0" GridPane.columnIndex="6" GridPane.rowIndex="6" />
+            <Circle fx:id="12" fill="WHITE" onMousePressed="#mouseChooseChecker" radius="24.0" GridPane.columnIndex="8" GridPane.rowIndex="6" />
+            <Circle fx:id="13" fill="BLACK" onMousePressed="#mouseChooseChecker" radius="24.0" GridPane.columnIndex="3" GridPane.rowIndex="3" />
+            <Circle fx:id="14" fill="BLACK" onMousePressed="#mouseChooseChecker" radius="24.0" GridPane.columnIndex="5" GridPane.rowIndex="3" />
+            <Circle fx:id="15" fill="BLACK" onMousePressed="#mouseChooseChecker" radius="24.0" GridPane.columnIndex="7" GridPane.rowIndex="3" />
+            <Circle fx:id="16" fill="BLACK" onMousePressed="#mouseChooseChecker" radius="24.0" GridPane.columnIndex="9" GridPane.rowIndex="3" />
+            <Circle fx:id="17" fill="BLACK" onMousePressed="#mouseChooseChecker" radius="24.0" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+            <Circle fx:id="18" fill="BLACK" onMousePressed="#mouseChooseChecker" radius="24.0" GridPane.columnIndex="4" GridPane.rowIndex="2" />
+            <Circle fx:id="19" fill="BLACK" onMousePressed="#mouseChooseChecker" radius="24.0" GridPane.columnIndex="6" GridPane.rowIndex="2" />
+            <Circle fx:id="20" fill="BLACK" onMousePressed="#mouseChooseChecker" radius="24.0" GridPane.columnIndex="8" GridPane.rowIndex="2" />
+            <Circle fx:id="21" fill="BLACK" onMousePressed="#mouseChooseChecker" radius="24.0" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+            <Circle fx:id="22" fill="BLACK" onMousePressed="#mouseChooseChecker" radius="24.0" GridPane.columnIndex="5" GridPane.rowIndex="1" />
+            <Circle fx:id="23" fill="BLACK" onMousePressed="#mouseChooseChecker" radius="24.0" GridPane.columnIndex="7" GridPane.rowIndex="1" />
+            <Circle fx:id="24" fill="BLACK" onMousePressed="#mouseChooseChecker" radius="24.0" GridPane.columnIndex="9" GridPane.rowIndex="1" />
          </children>
       </GridPane>
       <Label fx:id="playerTwoText" layoutX="14.0" layoutY="14.0" text="Player Two" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="15.0">
