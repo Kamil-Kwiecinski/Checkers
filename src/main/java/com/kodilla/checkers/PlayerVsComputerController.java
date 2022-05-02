@@ -7,7 +7,8 @@ import javafx.scene.layout.AnchorPane;
 
 import java.io.IOException;
 
-public class PlayerVsComputerController extends GameController{
+public class PlayerVsComputerController extends GameController {
+
     public PlayerVsComputerController() {
         super();
     }
@@ -15,6 +16,7 @@ public class PlayerVsComputerController extends GameController{
     private MainController mainController;
     Player playerOne;
     Player computer;
+
 
     @FXML
     private TextField playerOneTextField;

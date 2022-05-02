@@ -111,7 +111,7 @@ public class GameController {
 
     public void mouseChoosePlace(MouseEvent e) {
         Node source = (Node) e.getSource();
-        String choosenCircleColor = "";
+        String chooseCircleColor = "";
 
         if (source.toString().contains("fill=0x5e5e5eff")) {
             Integer columnIndex = GridPane.getColumnIndex(source);
@@ -121,9 +121,9 @@ public class GameController {
             System.out.println("Mouse choose cell: " + newXCoordinate + " " + newYCoordinate);
 
             if (circle.toString().contains("0xffffffff")) {
-                choosenCircleColor = "white";
+                chooseCircleColor = "white";
             } else if (circle.toString().contains("0x000000ff")) {
-                choosenCircleColor = "black";
+                chooseCircleColor = "black";
             }
 
             if (rounds <= 2
@@ -137,45 +137,71 @@ public class GameController {
                     deleteAndCreateCircles();
                     rounds++;
                 } else {
-                    if ((Math.abs(newXCoordinate - xCoordinate) == 1)
-                            && (Math.abs(newYCoordinate - yCoordinate) == 1)) {
+                    if (newXCoordinate > xCoordinate && newYCoordinate > yCoordinate) {
                         if (cells[xCoordinate + 1][yCoordinate + 1].isEmpty()) {
-                            deleteAndCreateCircles();
-                            rounds++;
-                        } else if (cells[xCoordinate + 1][yCoordinate - 1].isEmpty()) {
-                            deleteAndCreateCircles();
-                            rounds++;
-                        } else if (cells[xCoordinate - 1][yCoordinate + 1].isEmpty()) {
-                            deleteAndCreateCircles();
-                            rounds++;
-                        } else if (cells[xCoordinate - 1][yCoordinate - 1].isEmpty()) {
-                            deleteAndCreateCircles();
-                            rounds++;
+                            if ((Math.abs(newXCoordinate - xCoordinate) == 1)
+                                    && (Math.abs(newYCoordinate - yCoordinate) == 1)) {
+                                deleteAndCreateCircles();
+                                rounds++;
+                            }
+                        } else if ((!cells[xCoordinate + 1][yCoordinate + 1].isEmpty())
+                                && !checkers[xCoordinate + 1][yCoordinate + 1].getColor().equals(chooseCircleColor)) {
+                            if ((Math.abs(newXCoordinate - xCoordinate) == 2)
+                                    && (Math.abs(newYCoordinate - yCoordinate) == 2)) {
+                                deleteAndCreateCircles();
+                                rounds++;
+                            }
                         }
-
-                    } else if ((Math.abs(newXCoordinate - xCoordinate) == 2)
-                            && (Math.abs(newYCoordinate - yCoordinate) == 2)) {
-                        if ((!cells[xCoordinate + 1][yCoordinate + 1].isEmpty())
-                                && !checkers[xCoordinate + 1][yCoordinate + 1].getColor().equals(choosenCircleColor)) {
-                            deleteAndCreateCircles();
-                            rounds++;
+                    } else if (newXCoordinate > xCoordinate && newYCoordinate < yCoordinate) {
+                        if (cells[xCoordinate + 1][yCoordinate - 1].isEmpty()) {
+                            if ((Math.abs(newXCoordinate - xCoordinate) == 1)
+                                    && (Math.abs(newYCoordinate - yCoordinate) == 1)) {
+                                deleteAndCreateCircles();
+                                rounds++;
+                            }
                         } else if ((!cells[xCoordinate + 1][yCoordinate - 1].isEmpty())
-                                && !checkers[xCoordinate + 1][yCoordinate - 1].getColor().equals(choosenCircleColor)) {
-                            deleteAndCreateCircles();
-                            rounds++;
+                                && !checkers[xCoordinate + 1][yCoordinate - 1].getColor().equals(chooseCircleColor)) {
+                            if ((Math.abs(newXCoordinate - xCoordinate) == 2)
+                                    && (Math.abs(newYCoordinate - yCoordinate) == 2)) {
+                                deleteAndCreateCircles();
+                                rounds++;
+                            }
+                        }
+                    } else if (newXCoordinate < xCoordinate && newYCoordinate > yCoordinate) {
+                        if (cells[xCoordinate - 1][yCoordinate + 1].isEmpty()) {
+                            if ((Math.abs(newXCoordinate - xCoordinate) == 1)
+                                    && (Math.abs(newYCoordinate - yCoordinate) == 1)) {
+                                deleteAndCreateCircles();
+                                rounds++;
+                            }
                         } else if ((!cells[xCoordinate - 1][yCoordinate + 1].isEmpty())
-                                && !checkers[xCoordinate - 1][yCoordinate + 1].getColor().equals(choosenCircleColor)) {
-                            deleteAndCreateCircles();
-                            rounds++;
+                                && !checkers[xCoordinate - 1][yCoordinate + 1].getColor().equals(chooseCircleColor)) {
+                            if ((Math.abs(newXCoordinate - xCoordinate) == 2)
+                                    && (Math.abs(newYCoordinate - yCoordinate) == 2)) {
+                                deleteAndCreateCircles();
+                                rounds++;
+                            }
+                        }
+                    } else if (newXCoordinate < xCoordinate && newYCoordinate < yCoordinate) {
+                        if (cells[xCoordinate - 1][yCoordinate - 1].isEmpty()) {
+                            if ((Math.abs(newXCoordinate - xCoordinate) == 1)
+                                    && (Math.abs(newYCoordinate - yCoordinate) == 1)) {
+                                deleteAndCreateCircles();
+                                rounds++;
+                            }
                         } else if ((!cells[xCoordinate - 1][yCoordinate - 1].isEmpty())
-                                && !checkers[xCoordinate - 1][yCoordinate - 1].getColor().equals(choosenCircleColor)) {
-                            deleteAndCreateCircles();
-                            rounds++;
+                                && !checkers[xCoordinate - 1][yCoordinate - 1].getColor().equals(chooseCircleColor)) {
+                            if ((Math.abs(newXCoordinate - xCoordinate) == 2)
+                                    && (Math.abs(newYCoordinate - yCoordinate) == 2)) {
+                                deleteAndCreateCircles();
+                                rounds++;
+                            }
                         }
                     }
                 }
             }
         }
+
 
         totalNumberOfWhiteCheckers = game.howManyColorCheckers(checkers, "white");
         totalNumberOfBlackCheckers = game.howManyColorCheckers(checkers, "black");
