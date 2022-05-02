@@ -42,6 +42,7 @@ public class GameController {
     public static Label labelXCoordinate;
     public static Label labelYCoordinate;
     public static Label statusLabel;
+    public static Label roundLabel;
     public int xCoordinate;
     public int yCoordinate;
     public int newXCoordinate;
@@ -49,12 +50,13 @@ public class GameController {
     public Game game = new Game();
     public Cell[][] cells = game.createCells();
     public Checker[][] checkers = game.createCheckersOnCells(cells);
-    public int rounds = 1;
+    public int moves = 1;
     public int totalNumberOfCheckers = 24;
     public int totalNumberOfWhiteCheckers;
     public int totalNumberOfBlackCheckers;
     public Node circle;
     String actualColor = "0xffffffff";
+    public int rounds = 1;
 
     @FXML
     public GridPane gridPane;
@@ -68,13 +70,14 @@ public class GameController {
     public Label statusXCoordinate;
     @FXML
     public Label statusYCoordinate;
+    @FXML
+    public Label roundNumber;
 
     public void setMainController(MainController mainController) {
         this.mainController = mainController;
     }
 
     public void mouseChooseChecker(MouseEvent e) {
-
         circle = (Node) e.getSource();
 
         if (circle.toString().contains(actualColor)) {
@@ -126,30 +129,31 @@ public class GameController {
                 chooseCircleColor = "black";
             }
 
-            if (rounds <= 2
+            if (moves <= 2
                     && Math.abs(newXCoordinate - xCoordinate) <= 2
                     && Math.abs(newYCoordinate - yCoordinate) <= 2) {
                 deleteAndCreateCircles();
-                rounds++;
+                moves++;
 
-            } else if (rounds > 2) {
-                if (checkers[xCoordinate][yCoordinate].isQueen()) {
+            } else if (moves > 2) {
+                if (checkers[xCoordinate][yCoordinate] != null && checkers[xCoordinate][yCoordinate].isQueen()) {
                     deleteAndCreateCircles();
-                    rounds++;
+                    moves++;
+
                 } else {
                     if (newXCoordinate > xCoordinate && newYCoordinate > yCoordinate) {
                         if (cells[xCoordinate + 1][yCoordinate + 1].isEmpty()) {
                             if ((Math.abs(newXCoordinate - xCoordinate) == 1)
                                     && (Math.abs(newYCoordinate - yCoordinate) == 1)) {
                                 deleteAndCreateCircles();
-                                rounds++;
+                                moves++;
                             }
                         } else if ((!cells[xCoordinate + 1][yCoordinate + 1].isEmpty())
                                 && !checkers[xCoordinate + 1][yCoordinate + 1].getColor().equals(chooseCircleColor)) {
                             if ((Math.abs(newXCoordinate - xCoordinate) == 2)
                                     && (Math.abs(newYCoordinate - yCoordinate) == 2)) {
                                 deleteAndCreateCircles();
-                                rounds++;
+                                moves++;
                             }
                         }
                     } else if (newXCoordinate > xCoordinate && newYCoordinate < yCoordinate) {
@@ -157,14 +161,14 @@ public class GameController {
                             if ((Math.abs(newXCoordinate - xCoordinate) == 1)
                                     && (Math.abs(newYCoordinate - yCoordinate) == 1)) {
                                 deleteAndCreateCircles();
-                                rounds++;
+                                moves++;
                             }
                         } else if ((!cells[xCoordinate + 1][yCoordinate - 1].isEmpty())
                                 && !checkers[xCoordinate + 1][yCoordinate - 1].getColor().equals(chooseCircleColor)) {
                             if ((Math.abs(newXCoordinate - xCoordinate) == 2)
                                     && (Math.abs(newYCoordinate - yCoordinate) == 2)) {
                                 deleteAndCreateCircles();
-                                rounds++;
+                                moves++;
                             }
                         }
                     } else if (newXCoordinate < xCoordinate && newYCoordinate > yCoordinate) {
@@ -172,14 +176,14 @@ public class GameController {
                             if ((Math.abs(newXCoordinate - xCoordinate) == 1)
                                     && (Math.abs(newYCoordinate - yCoordinate) == 1)) {
                                 deleteAndCreateCircles();
-                                rounds++;
+                                moves++;
                             }
                         } else if ((!cells[xCoordinate - 1][yCoordinate + 1].isEmpty())
                                 && !checkers[xCoordinate - 1][yCoordinate + 1].getColor().equals(chooseCircleColor)) {
                             if ((Math.abs(newXCoordinate - xCoordinate) == 2)
                                     && (Math.abs(newYCoordinate - yCoordinate) == 2)) {
                                 deleteAndCreateCircles();
-                                rounds++;
+                                moves++;
                             }
                         }
                     } else if (newXCoordinate < xCoordinate && newYCoordinate < yCoordinate) {
@@ -187,14 +191,14 @@ public class GameController {
                             if ((Math.abs(newXCoordinate - xCoordinate) == 1)
                                     && (Math.abs(newYCoordinate - yCoordinate) == 1)) {
                                 deleteAndCreateCircles();
-                                rounds++;
+                                moves++;
                             }
                         } else if ((!cells[xCoordinate - 1][yCoordinate - 1].isEmpty())
                                 && !checkers[xCoordinate - 1][yCoordinate - 1].getColor().equals(chooseCircleColor)) {
                             if ((Math.abs(newXCoordinate - xCoordinate) == 2)
                                     && (Math.abs(newYCoordinate - yCoordinate) == 2)) {
                                 deleteAndCreateCircles();
-                                rounds++;
+                                moves++;
                             }
                         }
                     }
@@ -202,10 +206,12 @@ public class GameController {
             }
         }
 
-
         totalNumberOfWhiteCheckers = game.howManyColorCheckers(checkers, "white");
         totalNumberOfBlackCheckers = game.howManyColorCheckers(checkers, "black");
         totalNumberOfCheckers = totalNumberOfWhiteCheckers + totalNumberOfBlackCheckers;
+
+        System.out.println(totalNumberOfWhiteCheckers);
+        System.out.println(totalNumberOfBlackCheckers);
 
         if (totalNumberOfWhiteCheckers == 0) {
             statusText.setText("Blacks won.");
@@ -213,13 +219,15 @@ public class GameController {
             statusText.setText("Whites won");
         }
 
-        if (rounds % 2 == 0) {
+        if (moves % 2 == 0) {
             statusText.setText("Blacks move.");
             actualColor = "0x000000ff";
         } else {
             statusText.setText("White move.");
             actualColor = "0xffffffff";
+            rounds++;
         }
+        roundLabel.setText(Integer.toString(rounds));
     }
 
     private void deleteAndCreateCircles() {
@@ -330,5 +338,6 @@ public class GameController {
         labelTwo = playerTwoText;
         labelXCoordinate = statusXCoordinate;
         labelYCoordinate = statusYCoordinate;
+        roundLabel = roundNumber;
     }
 }

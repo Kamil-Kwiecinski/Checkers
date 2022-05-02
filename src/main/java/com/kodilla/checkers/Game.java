@@ -219,10 +219,16 @@ public class Game {
         int howManyWhiteCheckers = game.howManyColorCheckers(temporaryCheckers, WHITE_COLOR);
         int howManyBlackCheckers = game.howManyColorCheckers(temporaryCheckers, BLACK_COLOR);
 
-        if(howManyWhiteCheckers == 1) {
-            actualCheckers = game.findLastOne(temporaryCheckers, WHITE_COLOR);
+        if (howManyWhiteCheckers == 1) {
+            actualCheckers = game.newPosition(cells, newXCoordinate, newYCoordinate, xCoordinate, yCoordinate,
+                    temporaryCheckers);
+            actualCheckers = game.findLastOne(actualCheckers, WHITE_COLOR);
+
         } else if(howManyBlackCheckers == 1) {
-            actualCheckers = game.findLastOne(temporaryCheckers, BLACK_COLOR);
+            actualCheckers = game.newPosition(cells, newXCoordinate, newYCoordinate, xCoordinate, yCoordinate,
+                    temporaryCheckers);
+            actualCheckers = game.findLastOne(actualCheckers, BLACK_COLOR);
+
         } else {
             actualCheckers = game.newPosition(cells, newXCoordinate, newYCoordinate, xCoordinate, yCoordinate,
                     temporaryCheckers);

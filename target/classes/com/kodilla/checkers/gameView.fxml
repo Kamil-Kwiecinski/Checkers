@@ -260,8 +260,18 @@
             <Font name="Lucida Bright" size="12.0" />
          </font>
       </Label>
-      <Button layoutX="27.0" layoutY="447.0" mnemonicParsing="false" onAction="#pauseAction" onKeyPressed="#pauseAction" text="Pause" />
-      <Label fx:id="statusText" layoutX="265.0" layoutY="7.0" prefHeight="32.0" prefWidth="89.0" text="Whites move." textAlignment="CENTER" wrapText="true">
+      <Button layoutX="20.0" layoutY="457.0" mnemonicParsing="false" onKeyPressed="#pauseAction" text="ESC for pause" />
+      <Label fx:id="statusText" layoutX="137.0" layoutY="7.0" prefHeight="32.0" prefWidth="89.0" text="Whites move." textAlignment="CENTER" wrapText="true">
+         <font>
+            <Font name="Lucida Bright" size="12.0" />
+         </font>
+      </Label>
+      <Label fx:id="roundText" layoutX="320.0" layoutY="7.0" prefHeight="32.0" prefWidth="50.0" text="Round:" wrapText="true">
+         <font>
+            <Font name="Lucida Bright" size="12.0" />
+         </font>
+      </Label>
+      <Label fx:id="roundNumber" layoutX="373.0" layoutY="7.0" prefHeight="32.0" prefWidth="26.0" text="1" wrapText="true">
          <font>
             <Font name="Lucida Bright" size="12.0" />
          </font>
