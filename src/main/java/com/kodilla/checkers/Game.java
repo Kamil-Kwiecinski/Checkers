@@ -5,27 +5,28 @@ public class Game {
 
     private static final String WHITE_COLOR = "white";
     private static final String BLACK_COLOR = "black";
+    private static final int sizeOfBoard = 8;
 
     public Cell[][] createCells() {
-        Cell[][] cells = new Cell[8][8];
-        for (int y = 0; y < 8; y++) {
-            for (int x = 0; x < 8; x = x + 2) {
+        Cell[][] cells = new Cell[sizeOfBoard][sizeOfBoard];
+        for (int y = 0; y < sizeOfBoard; y++) {
+            for (int x = 0; x < sizeOfBoard; x = x + 2) {
                 cells[x][y] = new Cell(true, x, y, BLACK_COLOR, "");
             }
         }
-        for (int y = 0; y < 8; y++) {
-            for (int x = 1; x < 8; x = x + 2) {
+        for (int y = 0; y < sizeOfBoard; y++) {
+            for (int x = 1; x < sizeOfBoard; x = x + 2) {
                 cells[x][y] = new Cell(true, x, y, WHITE_COLOR, "");
             }
         }
         for (int y = 0; y < 3; y++) {
-            for (int x = 0; x < 8; x++) {
+            for (int x = 0; x < sizeOfBoard; x++) {
                 if ((x + y) % 2 == 0)
                     cells[x][y].setStartPosition(WHITE_COLOR);
             }
         }
-        for (int y = 5; y < 8; y++) {
-            for (int x = 0; x < 8; x++) {
+        for (int y = 5; y < sizeOfBoard; y++) {
+            for (int x = 0; x < sizeOfBoard; x++) {
                 if ((x + y) % 2 == 0)
                     cells[x][y].setStartPosition(BLACK_COLOR);
             }
@@ -35,10 +36,10 @@ public class Game {
     }
 
     public Checker[][] createCheckersOnCells(Cell[][] cells) {
-        Checker[][] checkers = new Checker[8][8];
+        Checker[][] checkers = new Checker[sizeOfBoard][sizeOfBoard];
         int counter = 0;
-        for (int y = 0; y < 8; y++) {
-            for (int x = 0; x < 8; x++) {
+        for (int y = 0; y < sizeOfBoard; y++) {
+            for (int x = 0; x < sizeOfBoard; x++) {
                 if (cells[x][y].getStartPosition().equals(WHITE_COLOR)) {
                     counter++;
                     checkers[x][y] = new Checker(counter, WHITE_COLOR, false, false, x, y);
@@ -47,8 +48,8 @@ public class Game {
             }
         }
 
-        for (int y = 0; y < 8; y++) {
-            for (int x = 0; x < 8; x++) {
+        for (int y = 0; y < sizeOfBoard; y++) {
+            for (int x = 0; x < sizeOfBoard; x++) {
                 if (cells[x][y].getStartPosition().equals(BLACK_COLOR)) {
                     counter++;
                     checkers[x][y] = new Checker(counter, BLACK_COLOR, false, false, x, y);
@@ -63,50 +64,42 @@ public class Game {
     public Checker[][] move(Cell[][] cells, Checker[][] checkers, int xCoordinate, int yCoordinate, int newXCoordinate,
                             int newYCoordinate) {
 
-
-        Game game = new Game();
-        Checker[][] actualCheckers = new Checker[8][8];
         EnemyChecker enemyChecker = new EnemyChecker(0,0,0);
         int friendlyCheckerCounter = 0;
         int enemyCheckerCounter = 0;
 
-        actualCheckers = newCoordinatesIsEmpty(cells, checkers, xCoordinate, yCoordinate, newXCoordinate,
-                          newYCoordinate, game, actualCheckers, enemyChecker, enemyCheckerCounter,
-                          friendlyCheckerCounter);
+        checkers = newCoordinatesIsEmpty(cells, checkers, xCoordinate, yCoordinate, newXCoordinate,
+                newYCoordinate, enemyChecker, enemyCheckerCounter, friendlyCheckerCounter);
 
-        return actualCheckers;
+        return checkers;
     }
 
     private Checker[][] newCoordinatesIsEmpty(Cell[][] cells, Checker[][] checkers, int xCoordinate, int yCoordinate,
-                                              int newXCoordinate, int newYCoordinate, Game game,
-                                              Checker[][] actualCheckers, EnemyChecker enemyChecker,
+                                              int newXCoordinate, int newYCoordinate, EnemyChecker enemyChecker,
                                               int enemyCheckerCounter, int friendlyCheckerCounter) {
+
         if (cells[newXCoordinate][newYCoordinate].isEmpty()) {
             if (newXCoordinate > xCoordinate && newYCoordinate > yCoordinate) {
-                actualCheckers = directionXPlusYPlus(cells, checkers, xCoordinate, yCoordinate, newXCoordinate,
-                        newYCoordinate, game, actualCheckers, enemyChecker, enemyCheckerCounter,
-                        friendlyCheckerCounter);
+                checkers = directionXPlusYPlus(cells, checkers, xCoordinate, yCoordinate, newXCoordinate,
+                        newYCoordinate, enemyChecker, enemyCheckerCounter, friendlyCheckerCounter);
             } else if (newXCoordinate > xCoordinate && newYCoordinate < yCoordinate) {
-                actualCheckers = directionXPlusYMinus(cells, checkers, xCoordinate, yCoordinate, newXCoordinate,
-                        newYCoordinate, game, actualCheckers, enemyChecker, enemyCheckerCounter,
-                        friendlyCheckerCounter);
+                checkers = directionXPlusYMinus(cells, checkers, xCoordinate, yCoordinate, newXCoordinate,
+                        newYCoordinate, enemyChecker, enemyCheckerCounter, friendlyCheckerCounter);
             } else if (newXCoordinate < xCoordinate && newYCoordinate > yCoordinate) {
-                actualCheckers = directionXMinusYPlus(cells, checkers, xCoordinate, yCoordinate, newXCoordinate,
-                        newYCoordinate, game, actualCheckers, enemyChecker, enemyCheckerCounter,
-                        friendlyCheckerCounter);
+                checkers = directionXMinusYPlus(cells, checkers, xCoordinate, yCoordinate, newXCoordinate,
+                        newYCoordinate, enemyChecker, enemyCheckerCounter, friendlyCheckerCounter);
             } else if (newXCoordinate < xCoordinate && newYCoordinate < yCoordinate) {
-                actualCheckers = directionXMinusYMinus(cells, checkers, xCoordinate, yCoordinate, newXCoordinate,
-                        newYCoordinate, game, actualCheckers, enemyChecker, enemyCheckerCounter,
-                        friendlyCheckerCounter);
+                checkers = directionXMinusYMinus(cells, checkers, xCoordinate, yCoordinate, newXCoordinate,
+                        newYCoordinate, enemyChecker, enemyCheckerCounter, friendlyCheckerCounter);
             }
         }
-        return actualCheckers;
+        return checkers;
     }
 
     private Checker[][] directionXMinusYMinus(Cell[][] cells, Checker[][] checkers, int xCoordinate, int yCoordinate,
-                                              int newXCoordinate, int newYCoordinate, Game game,
-                                              Checker[][] actualCheckers, EnemyChecker enemyChecker,
+                                              int newXCoordinate, int newYCoordinate, EnemyChecker enemyChecker,
                                               int enemyCheckerCounter, int friendlyCheckerCounter) {
+
         for (int i = xCoordinate - 1; i > newXCoordinate; i--) {
             for (int n = yCoordinate - 1; n > newYCoordinate; n--) {
                 if (!cells[i][n].isEmpty()) {
@@ -120,15 +113,16 @@ public class Game {
                 }
             }
         }
-        actualCheckers = whoIsClose(cells, checkers, xCoordinate, yCoordinate, newXCoordinate, newYCoordinate, game,
-                actualCheckers, enemyChecker, friendlyCheckerCounter);
-        return actualCheckers;
+        checkers = whoIsClose(cells, checkers, xCoordinate, yCoordinate, newXCoordinate, newYCoordinate,
+                enemyChecker, friendlyCheckerCounter);
+        return checkers;
     }
 
     private Checker[][] directionXMinusYPlus(Cell[][] cells, Checker[][] checkers, int xCoordinate, int yCoordinate,
-                                             int newXCoordinate, int newYCoordinate, Game game,
-                                             Checker[][] actualCheckers, EnemyChecker enemyChecker,
-                                             int enemyCheckerCounter, int friendlyCheckerCounter) {
+                                             int newXCoordinate, int newYCoordinate,
+                                             EnemyChecker enemyChecker, int enemyCheckerCounter,
+                                             int friendlyCheckerCounter) {
+
         for (int i = xCoordinate - 1; i > newXCoordinate; i--) {
             for (int n = yCoordinate + 1; n < newYCoordinate; n++) {
                 if (!cells[i][n].isEmpty()) {
@@ -142,15 +136,15 @@ public class Game {
                 }
             }
         }
-        actualCheckers = whoIsClose(cells, checkers, xCoordinate, yCoordinate, newXCoordinate, newYCoordinate, game,
-                actualCheckers, enemyChecker, friendlyCheckerCounter);
-        return actualCheckers;
+        checkers = whoIsClose(cells, checkers, xCoordinate, yCoordinate, newXCoordinate, newYCoordinate, enemyChecker,
+                friendlyCheckerCounter);
+        return checkers;
     }
 
     private Checker[][] directionXPlusYMinus(Cell[][] cells, Checker[][] checkers, int xCoordinate, int yCoordinate,
-                                             int newXCoordinate, int newYCoordinate, Game game,
-                                             Checker[][] actualCheckers, EnemyChecker enemyChecker,
+                                             int newXCoordinate, int newYCoordinate, EnemyChecker enemyChecker,
                                              int enemyCheckerCounter, int friendlyCheckerCounter) {
+
         for (int i = xCoordinate + 1; i < newXCoordinate; i++) {
             for (int n = yCoordinate - 1; n > newYCoordinate; n--) {
                 if (!cells[i][n].isEmpty()) {
@@ -164,15 +158,15 @@ public class Game {
                 }
             }
         }
-        actualCheckers = whoIsClose(cells, checkers, xCoordinate, yCoordinate, newXCoordinate, newYCoordinate, game,
-                actualCheckers, enemyChecker, friendlyCheckerCounter);
-        return actualCheckers;
+        checkers = whoIsClose(cells, checkers, xCoordinate, yCoordinate, newXCoordinate, newYCoordinate, enemyChecker,
+                friendlyCheckerCounter);
+        return checkers;
     }
 
     private Checker[][] directionXPlusYPlus(Cell[][] cells, Checker[][] checkers, int xCoordinate, int yCoordinate,
-                                            int newXCoordinate, int newYCoordinate, Game game,
-                                            Checker[][] actualCheckers, EnemyChecker enemyChecker,
+                                            int newXCoordinate, int newYCoordinate, EnemyChecker enemyChecker,
                                             int enemyCheckerCounter, int friendlyCheckerCounter) {
+
         for (int i = xCoordinate + 1; i < newXCoordinate; i++) {
             for (int n = yCoordinate + 1; n < newYCoordinate; n++) {
                 if (!cells[i][n].isEmpty()) {
@@ -186,51 +180,53 @@ public class Game {
                 }
             }
         }
-        actualCheckers = whoIsClose(cells, checkers, xCoordinate, yCoordinate, newXCoordinate, newYCoordinate, game,
-                actualCheckers, enemyChecker, friendlyCheckerCounter);
-        return actualCheckers;
+        checkers = whoIsClose(cells, checkers, xCoordinate, yCoordinate, newXCoordinate, newYCoordinate, enemyChecker,
+                friendlyCheckerCounter);
+        return checkers;
     }
 
     private Checker[][] whoIsClose(Cell[][] cells, Checker[][] checkers, int xCoordinate, int yCoordinate,
-                                   int newXCoordinate, int newYCoordinate, Game game, Checker[][] actualCheckers,
-                                   EnemyChecker enemyChecker, int friendlyCheckerCounter) {
+                                   int newXCoordinate, int newYCoordinate, EnemyChecker enemyChecker,
+                                   int friendlyCheckerCounter) {
+
+        Checker[][] actualCheckers = new Checker[sizeOfBoard][sizeOfBoard];
         if(enemyChecker.getEnemyCounter() == 0) {
             if(friendlyCheckerCounter == 1) {
                 actualCheckers = checkers;
             } else {
-                actualCheckers = game.newPosition(cells, newXCoordinate, newYCoordinate, xCoordinate, yCoordinate,
+                actualCheckers = this.newPosition(cells, newXCoordinate, newYCoordinate, xCoordinate, yCoordinate,
                         checkers);
             }
         } else if (enemyChecker.getEnemyCounter() == 1) {
             actualCheckers = enemyCheckerIsClose(cells, checkers, xCoordinate, yCoordinate, newXCoordinate,
-                    newYCoordinate, game, enemyChecker);
+                    newYCoordinate, enemyChecker);
         }
         return actualCheckers;
     }
 
     private Checker[][] enemyCheckerIsClose(Cell[][] cells, Checker[][] checkers, int xCoordinate, int yCoordinate,
-                                            int newXCoordinate, int newYCoordinate, Game game,
-                                            EnemyChecker enemyChecker) {
+                                            int newXCoordinate, int newYCoordinate, EnemyChecker enemyChecker) {
+
         Checker[][] actualCheckers;
         Checker[][] temporaryCheckers;
         int enemyXPosition = enemyChecker.getEnemyXPosition();
         int enemyYPosition = enemyChecker.getEnemyYPosition();
-        temporaryCheckers = game.elimination(enemyXPosition, enemyYPosition, cells, checkers);
-        int howManyWhiteCheckers = game.howManyColorCheckers(temporaryCheckers, WHITE_COLOR);
-        int howManyBlackCheckers = game.howManyColorCheckers(temporaryCheckers, BLACK_COLOR);
+        temporaryCheckers = this.elimination(enemyXPosition, enemyYPosition, cells, checkers);
+        int howManyWhiteCheckers = this.howManyColorCheckers(temporaryCheckers, WHITE_COLOR);
+        int howManyBlackCheckers = this.howManyColorCheckers(temporaryCheckers, BLACK_COLOR);
 
         if (howManyWhiteCheckers == 1) {
-            actualCheckers = game.newPosition(cells, newXCoordinate, newYCoordinate, xCoordinate, yCoordinate,
+            actualCheckers = this.newPosition(cells, newXCoordinate, newYCoordinate, xCoordinate, yCoordinate,
                     temporaryCheckers);
-            actualCheckers = game.findLastOne(actualCheckers, WHITE_COLOR);
+            actualCheckers = this.findLastOne(actualCheckers, WHITE_COLOR);
 
         } else if(howManyBlackCheckers == 1) {
-            actualCheckers = game.newPosition(cells, newXCoordinate, newYCoordinate, xCoordinate, yCoordinate,
+            actualCheckers = this.newPosition(cells, newXCoordinate, newYCoordinate, xCoordinate, yCoordinate,
                     temporaryCheckers);
-            actualCheckers = game.findLastOne(actualCheckers, BLACK_COLOR);
+            actualCheckers = this.findLastOne(actualCheckers, BLACK_COLOR);
 
         } else {
-            actualCheckers = game.newPosition(cells, newXCoordinate, newYCoordinate, xCoordinate, yCoordinate,
+            actualCheckers = this.newPosition(cells, newXCoordinate, newYCoordinate, xCoordinate, yCoordinate,
                     temporaryCheckers);
         }
         return actualCheckers;
@@ -246,7 +242,8 @@ public class Game {
 
     public Checker[][] newPosition(Cell cells[][], int newXCoordinate, int newYCoordinate, int xCoordinate,
                                    int yCoordinate, Checker[][] checkers) {
-        Checker[][] actualCheckers = new Checker[8][8];
+
+        Checker[][] actualCheckers = new Checker[sizeOfBoard][sizeOfBoard];
 
         if (checkers[xCoordinate][yCoordinate] != null) {
             int temporaryId = checkers[xCoordinate][yCoordinate].getId();
@@ -261,8 +258,8 @@ public class Game {
 
             actualCheckers[newXCoordinate][newYCoordinate] = temporaryChecker;
 
-            for (int y = 0; y < 8; y++) {
-                for (int x = 0; x < 8; x++) {
+            for (int y = 0; y < sizeOfBoard; y++) {
+                for (int x = 0; x < sizeOfBoard; x++) {
                     if (checkers[x][y] != checkers[xCoordinate][yCoordinate]) {
                         if (checkers[x][y] != null) {
                             temporaryId = checkers[x][y].getId();
@@ -281,12 +278,12 @@ public class Game {
     }
 
     public Checker[][] elimination(int xCoordinate, int yCoordinate, Cell cells[][], Checker[][] checkers) {
-        Checker[][] actualCheckers = new Checker[8][8];
+        Checker[][] actualCheckers = new Checker[sizeOfBoard][sizeOfBoard];
         cells[xCoordinate][yCoordinate].setEmpty(true);
         checkers[xCoordinate][yCoordinate].setEliminated(true);
 
-        for (int y = 0; y < 8; y++) {
-            for (int x = 0; x < 8; x++) {
+        for (int y = 0; y < sizeOfBoard; y++) {
+            for (int x = 0; x < sizeOfBoard; x++) {
                 if (checkers[x][y] != checkers[xCoordinate][yCoordinate]) {
                     if (checkers[x][y] != null) {
                         actualCheckers[x][y] = checkers[x][y];
@@ -299,8 +296,8 @@ public class Game {
 
     public int howManyColorCheckers(Checker[][] checkers, String color) {
         int counter = 0;
-        for (int x = 0; x < 8; x++) {
-            for (int y = 0; y < 8; y++) {
+        for (int x = 0; x < sizeOfBoard; x++) {
+            for (int y = 0; y < sizeOfBoard; y++) {
                 if(checkers[x][y] != null) {
                     if(checkers[x][y].getColor().equals(color)) {
                         counter++;
@@ -312,8 +309,8 @@ public class Game {
     }
 
     public Checker[][] findLastOne(Checker[][] checkers, String color){
-        for (int x = 0; x < 8; x++) {
-            for (int y = 0; y < 8; y++) {
+        for (int x = 0; x < sizeOfBoard; x++) {
+            for (int y = 0; y < sizeOfBoard; y++) {
                 if (checkers[x][y] != null) {
                     if (checkers[x][y].getColor().equals(color)) {
                         checkers[x][y].setQueen(true);

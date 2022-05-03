@@ -13,6 +13,7 @@ public class Cell {
         this.yCoordinate = yCoordinate;
         this.color = color;
         this.startPosition = startPosition;
+
     }
 
     public boolean isEmpty() {
